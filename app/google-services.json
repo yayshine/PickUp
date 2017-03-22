@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "917091226611",
+    "firebase_url": "https://pickup-64523.firebaseio.com",
+    "project_id": "pickup-64523",
+    "storage_bucket": "pickup-64523.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917091226611:android:703eaab285a71e12",
+        "android_client_info": {
+          "package_name": "com.mobile.pickup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917091226611-s54k2fb5v3o27f2tbqfnar7dktm32b23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlOdQRoLjORMpcjM-ijlcMuK73v-DQ5gg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
