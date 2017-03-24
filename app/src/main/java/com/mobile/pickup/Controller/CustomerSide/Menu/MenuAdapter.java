@@ -2,6 +2,7 @@ package com.mobile.pickup.Controller.CustomerSide.Menu;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
 import com.mobile.pickup.Model.FoodItem;
@@ -10,7 +11,9 @@ import com.mobile.pickup.View.CustomerSide.Menu.FoodItemView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yayshin on 3/24/17.
@@ -54,7 +57,7 @@ public class MenuAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return items.get(position).getFoodItemID();
     }
 
     @Override
@@ -66,7 +69,7 @@ public class MenuAdapter extends BaseAdapter{
             view = new FoodItemView(parent.getContext());
         }
         view.setData(items.get(position));
-        return view;
 
+        return view;
     }
 }

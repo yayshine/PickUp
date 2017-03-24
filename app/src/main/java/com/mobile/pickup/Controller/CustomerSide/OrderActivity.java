@@ -8,13 +8,12 @@ import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class OrderActivity extends AppCompatActivity {
+    public static final String TAG_VENDOR_LIST = "VENDOR_LIST";
+    public static final String TAG_MENU = "MENU";
 
     public FragmentManager mFragmentManager;
-    public List<Order> orderList = new ArrayList<>();
+    public static Order mOrder = new Order();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
