@@ -1,4 +1,4 @@
-package com.mobile.pickup.Customer;
+package com.mobile.pickup.Customer.VendorList;
 
 
 import android.os.Bundle;
