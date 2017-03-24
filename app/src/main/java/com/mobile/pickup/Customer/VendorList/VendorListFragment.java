@@ -1,4 +1,4 @@
-package com.mobile.pickup.Customer;
+package com.mobile.pickup.Customer.VendorList;
 
 
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.mobile.pickup.Customer.Menu.MenuFragment;
+import com.mobile.pickup.Customer.OrderActivity;
 import com.mobile.pickup.R;
 
 /**
@@ -49,6 +51,9 @@ public class VendorListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // navigate to next fragment
+                ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
+                        .replace(R.id.container, new MenuFragment())
+                        .commit();
             }
         });
 

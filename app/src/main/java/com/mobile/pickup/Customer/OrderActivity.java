@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mobile.pickup.Customer.VendorList.VendorListFragment;
 import com.mobile.pickup.R;
 
 public class OrderActivity extends AppCompatActivity {
 
-    FragmentManager mFragmentManager;
+    public FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

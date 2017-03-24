@@ -13,9 +13,8 @@
 
     <TextView
         android:id="@+id/text_wait_time_label"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:textColor="@color/colorAccent"
         android:text="waitTime" />
 </LinearLayout>
