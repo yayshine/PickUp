@@ -1,7 +1,7 @@
 package com.mobile.pickup;
 
 import com.firebase.client.Firebase;
-import com.mobile.pickup.model.Order;
+import com.mobile.pickup.Model.Order;
 
 import java.util.List;
 
@@ -16,7 +16,8 @@ public class FirebaseTask {
     public void addOrder(int customerID, int vendorID, List<Integer> foodItemsID, int waitingTime, long timeCreated){
         Firebase ref = new Firebase(FIREBASE_URL);
         Firebase orderRef = ref.child("activeOrders").push();
-        Order order = new Order(customerID, vendorID, foodItemsID, false, waitingTime, timeCreated);
+        int orderId = 0; // dummy for now
+        Order order = new Order(orderId, customerID, vendorID, foodItemsID, false, waitingTime, timeCreated);
         orderRef.setValue(order);
     }
 
