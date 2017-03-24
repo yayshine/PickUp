@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class Order {
+    private int orderID;
     private int customerID;
     private int vendorID;
     private List<Integer> foodItemsID;
@@ -19,7 +20,8 @@ public class Order {
     }
 
     // constructor
-    public Order(int customerID, int vendorID, List<Integer> foodItemsID, boolean isReady, int waitingTime, long timeCreated) {
+    public Order(int orderID, int customerID, int vendorID, List<Integer> foodItemsID, boolean isReady, int waitingTime, long timeCreated) {
+        this.orderID = orderID;
         this.customerID = customerID;
         this.vendorID = vendorID;
         this.foodItemsID = foodItemsID;
@@ -29,6 +31,8 @@ public class Order {
     }
 
     // public getters
+    public int getOrderID() { return orderID; }
+
     public int getCustomerID() {
         return customerID;
     }
