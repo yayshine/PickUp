@@ -41,7 +41,16 @@ public class VendorListAdapter extends BaseAdapter {
         Collections.sort(items, new Comparator<VendorListItem>() {
             @Override
             public int compare(VendorListItem o1, VendorListItem o2) {
-                return o1.id - o2.id;
+                if(o1 instanceof VendorListHeader && o2 instanceof VendorListHeader) {
+                    return ((VendorListHeader)o1).nameLabel.compareTo(((VendorListHeader)o2).nameLabel);
+                }
+                if(o1 instanceof VendorListHeader){
+                    return -1;
+                }
+                if(o2 instanceof VendorListHeader){
+                    return 1;
+                }
+                return o1.name.compareTo(o2.name);
             }
         });
 
