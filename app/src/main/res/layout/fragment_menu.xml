@@ -33,7 +33,9 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/text_menu_label"
             android:layout_centerHorizontal="true"
-            android:layout_above="@+id/btn_checkout" />
+            android:layout_above="@+id/btn_checkout"
+            android:clickable="false"
+            android:id="@+id/list_menu"/>
 
         <Button
             android:id="@+id/btn_checkout"
