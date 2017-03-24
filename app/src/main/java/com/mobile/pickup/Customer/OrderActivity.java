@@ -9,7 +9,7 @@ import com.mobile.pickup.R;
 
 public class OrderActivity extends AppCompatActivity {
 
-    FragmentManager mFragmentManager;
+    public FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
