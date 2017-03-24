@@ -1,9 +1,10 @@
-package com.mobile.pickup.Customer.VendorList;
+package com.mobile.pickup.View.CustomerSide.VendorList;
 
 import android.content.Context;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
 import com.mobile.pickup.R;
 
 /**

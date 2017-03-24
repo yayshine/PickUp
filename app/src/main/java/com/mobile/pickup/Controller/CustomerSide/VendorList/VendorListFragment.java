@@ -1,4 +1,4 @@
-package com.mobile.pickup.Customer.VendorList;
+package com.mobile.pickup.Controller.CustomerSide.VendorList;
 
 
 import android.os.Bundle;
@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.mobile.pickup.Customer.Menu.MenuFragment;
-import com.mobile.pickup.Customer.OrderActivity;
+import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
+import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
+import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
+import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
 import com.mobile.pickup.R;
 
 /**
