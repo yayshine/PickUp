@@ -6,22 +6,24 @@ package com.mobile.pickup.Model;
 
 public class Vendor {
 
-    private int vendorID;
+    private String vendorID;
     private String foodTruckName;
-    private int menuID;
-    private OperatingHours operatingHours;
+    private String menuID;
+    private String operatingHours;
+    private boolean isOpen;
 
     public Vendor() {
     }
 
-    public Vendor(int vendorID, String foodTruckName, int menuID, OperatingHours operatingHours) {
+    public Vendor(String vendorID, String foodTruckName, String menuID, String operatingHours, boolean isOpen) {
         this.vendorID = vendorID;
         this.foodTruckName = foodTruckName;
         this.menuID = menuID;
         this.operatingHours = operatingHours;
+        this.isOpen = isOpen;
     }
 
-    public int getVendorID() {
+    public String getVendorID() {
         return vendorID;
     }
 
@@ -29,11 +31,15 @@ public class Vendor {
         return foodTruckName;
     }
 
-    public int getMenuID() {
+    public String getMenuID() {
         return menuID;
     }
 
-    public OperatingHours getOperatingHours() {
+    public String getOperatingHours() {
         return operatingHours;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
     }
 }
