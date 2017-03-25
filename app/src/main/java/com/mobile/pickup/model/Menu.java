@@ -1,4 +1,4 @@
-package com.mobile.pickup2.model;
+package com.mobile.pickup.model;
 
 import java.util.HashMap;
 
@@ -9,15 +9,15 @@ import java.util.HashMap;
 public class Menu {
     private String menuID;
     private String vendorID;
-    private HashMap<String, Boolean> foodItemIDList;
+    private HashMap<String, Boolean> foodItemIDVisibilityMap;
 
     public Menu() {
     }
 
-    public Menu(String menuID, String vendorID, HashMap<String, Boolean> foodItemIDList) {
+    public Menu(String menuID, String vendorID, HashMap<String, Boolean> foodItemIDVisibilityMap) {
         this.menuID = menuID;
         this.vendorID = vendorID;
-        this.foodItemIDList = foodItemIDList;
+        this.foodItemIDVisibilityMap = foodItemIDVisibilityMap;
     }
 
     public String getMenuID() {
@@ -28,7 +28,7 @@ public class Menu {
         return vendorID;
     }
 
-    public HashMap<String, Boolean> getFoodItemIDList() {
-        return foodItemIDList;
+    public HashMap<String, Boolean> getFoodItemIDVisibilityMap() {
+        return foodItemIDVisibilityMap;
     }
 }

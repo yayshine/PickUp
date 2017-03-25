@@ -1,16 +1,16 @@
-package com.mobile.pickup2.model;
+package com.mobile.pickup.model;
 
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by Yanqing on 3/23/17.
  */
 
 public class Order {
-    private int orderID;
-    private int customerID;
-    private int vendorID;
-    private List<Integer> foodItemsID;
+    private String orderID;
+    private String customerID;
+    private String vendorID;
+    private HashMap<String,Integer> foodItemIDQuantMap;
     private boolean isReady;
     private int waitingTime;
     private long timeCreated;
@@ -19,30 +19,32 @@ public class Order {
     public Order() {
     }
 
-    // constructor
-    public Order(int orderID, int customerID, int vendorID, List<Integer> foodItemsID, boolean isReady, int waitingTime, long timeCreated) {
+    public Order(String orderID, String customerID, String vendorID,
+                 HashMap<String, Integer> foodItemIDQuantMap, boolean isReady,
+                 int waitingTime, long timeCreated) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.vendorID = vendorID;
-        this.foodItemsID = foodItemsID;
+        this.foodItemIDQuantMap = foodItemIDQuantMap;
         this.isReady = isReady;
         this.waitingTime = waitingTime;
         this.timeCreated = timeCreated;
     }
 
-    // public getters
-    public int getOrderID() { return orderID; }
+    public String getOrderID() {
+        return orderID;
+    }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
-    public int getVendorID() {
+    public String getVendorID() {
         return vendorID;
     }
 
-    public List<Integer> getFoodItemsID() {
-        return foodItemsID;
+    public HashMap<String, Integer> getFoodItemIDQuantMap() {
+        return foodItemIDQuantMap;
     }
 
     public boolean isReady() {
@@ -56,6 +58,5 @@ public class Order {
     public long getTimeCreated() {
         return timeCreated;
     }
-
 }
 

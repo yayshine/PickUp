@@ -1,9 +1,9 @@
-package com.mobile.pickup2;
+package com.mobile.pickup;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mobile.pickup2.model.Menu;
-import com.mobile.pickup2.model.Vendor;
+import com.mobile.pickup.model.Menu;
+import com.mobile.pickup.model.Vendor;
 
 import java.util.HashMap;
 
@@ -32,12 +32,17 @@ public class MenuManager {
         menuRef.child(menuID).child("vendorID").setValue(vendorID);
     }
 
+
     public static void addFoodItem(String menuID, String foodItemID){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference menuRef = database.getReference("Menu");
 
         menuRef.child(menuID).child("foodItemIDList").child(foodItemID).setValue(true);
+    }
+
+    public static void activateFoodItem(String menuID, String foodItemID){
+        addFoodItem(menuID,foodItemID);
     }
 
     public static void deleteFoodItem(String menuID, String foodItemID){

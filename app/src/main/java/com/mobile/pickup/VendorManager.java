@@ -1,8 +1,8 @@
-package com.mobile.pickup2;
+package com.mobile.pickup;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mobile.pickup2.model.Vendor;
+import com.mobile.pickup.model.Vendor;
 
 /**
  * Created by Yanqing on 3/24/17.
@@ -45,4 +45,10 @@ public final class VendorManager {
         vendorRef.child(vendorID).child("operatingHours").setValue(operatingHours);
     }
 
+    public static void updateIsOpen(String vendorID, Boolean isOpen){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference vendorRef = database.getReference("Vendor");
+
+        vendorRef.child(vendorID).child("isOpen").setValue(isOpen);
+    }
 }
