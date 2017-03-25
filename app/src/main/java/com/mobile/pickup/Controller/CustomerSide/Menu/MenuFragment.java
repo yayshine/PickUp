@@ -68,8 +68,8 @@ public class MenuFragment extends Fragment {
 
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
-                        .addToBackStack(OrderActivity.TAG_MENU)
                         .replace(R.id.container, new ReviewFragment())
+                        .addToBackStack(OrderActivity.TAG_MENU)
                         .commit();
             }
         });
