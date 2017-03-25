@@ -51,6 +51,8 @@ public class MenuFragment extends Fragment {
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // customer selection is stored to mTempOrder by FoodItemView
+
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
                         .replace(R.id.container, new ReviewFragment())

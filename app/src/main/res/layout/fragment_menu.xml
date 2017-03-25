@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="estimating..." />
+            android:text="Estimation: 20 mins" />
 
         <TextView
             android:id="@+id/text_menu_label"

@@ -4,7 +4,8 @@ import android.content.Context;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+import com.mobile.pickup.Model.Vendor;
+
 import com.mobile.pickup.R;
 
 /**
@@ -23,8 +24,8 @@ public class VendorListItemView extends FrameLayout {
         text_wait_time = (TextView)findViewById(R.id.text_wait_time);
     }
 
-    public void setData(VendorListItem foodtruck){
-        text_name.setText(foodtruck.name);
-        text_wait_time.setText(Integer.toString(foodtruck.waitTime));
+    public void setData(Vendor vendor){
+        text_name.setText(vendor.getFoodTruckName());
+        text_wait_time.setText("20 mins"); // dummy wait time for now
     }
 }

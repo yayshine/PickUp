@@ -5,19 +5,19 @@ package com.mobile.pickup.Model;
  */
 
 public class Customer {
-    private String customerID;
+    private String id;
     private String customerName;
 
     public Customer() {
     }
 
-    public Customer(String customerID, String customerName) {
-        this.customerID = customerID;
+    public Customer(String id, String customerName) {
+        this.id = id;
         this.customerName = customerName;
     }
 
-    public String getCustomerID() {
-        return customerID;
+    public String getID() {
+        return id;
     }
 
     public String getCustomerName() {
