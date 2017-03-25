@@ -2,8 +2,8 @@ package com.mobile.pickup;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mobile.pickup.model.Menu;
-import com.mobile.pickup.model.Vendor;
+import com.mobile.pickup.Model.Menu;
+import com.mobile.pickup.Model.Vendor;
 
 import java.util.HashMap;
 

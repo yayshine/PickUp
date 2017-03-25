@@ -32,9 +32,9 @@ public class VendorListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // Dummy data for now
         mVendorList = new VendorListItem[3];
-        mVendorList[0] = new VendorListItem(0, "Uncle Luoyang", 10);
-        mVendorList[1] = new VendorListItem(1, "Aunt HongKong", 15);
-        mVendorList[2] = new VendorListItem(2, "Granpa Macao", 20);
+        mVendorList[0] = new VendorListItem("a", "Uncle Luoyang", 10);
+        mVendorList[1] = new VendorListItem("b", "Aunt HongKong", 15);
+        mVendorList[2] = new VendorListItem("c", "Granpa Macao", 20);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class VendorListFragment extends Fragment {
 
         ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
 
-        VendorListAdapter adapter = new VendorListAdapter(mVendorList);
+        final VendorListAdapter adapter = new VendorListAdapter(mVendorList);
         adapter.addHeaderItem(new VendorListHeader("name", "wait time"));
 
         listView.setAdapter(adapter);
@@ -52,6 +52,8 @@ public class VendorListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                OrderActivity.mOrder.setVendorID(((VendorListItem)adapter.getItem(position)).id);
+
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
                         .replace(R.id.container, new MenuFragment())

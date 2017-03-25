@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.mobile.pickup.Controller.CustomerSide.Menu.MenuAdapter;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.R;
@@ -43,9 +42,9 @@ public class FoodItemView extends FrameLayout {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int quantity = (int)parent.getSelectedItem();
                 if(quantity > 0) {
-                    OrderActivity.mOrder.getFoodItemQuantityPair().put(foodItem.getFoodItemID(), quantity);
+                    OrderActivity.mOrder.getFoodItemIDQuantMap().put(foodItem.getFoodItemID(), quantity);
                 }else{
-                    OrderActivity.mOrder.getFoodItemQuantityPair().remove(foodItem.getFoodItemID());
+                    OrderActivity.mOrder.getFoodItemIDQuantMap().remove(foodItem.getFoodItemID());
                 }
             }
 

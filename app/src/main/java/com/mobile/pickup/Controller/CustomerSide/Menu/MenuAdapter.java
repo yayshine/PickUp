@@ -36,7 +36,7 @@ public class MenuAdapter extends BaseAdapter{
         Collections.sort(items, new Comparator<FoodItem>() {
             @Override
             public int compare(FoodItem o1, FoodItem o2) {
-                return o1.getFoodItemID() - o2.getFoodItemID();
+                return o1.getFoodItemID().compareTo(o2.getFoodItemID());
             }
         });
 
@@ -54,7 +54,7 @@ public class MenuAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        return items.get(position).getFoodItemID();
+        return position;
     }
 
     @Override

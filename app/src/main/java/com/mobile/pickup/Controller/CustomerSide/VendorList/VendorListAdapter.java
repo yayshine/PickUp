@@ -92,6 +92,10 @@ public class VendorListAdapter extends BaseAdapter {
         return position;
     }
 
+    public String getVendorId(int position){
+        return items.get(position).id;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         switch(getItemViewType(position)){
