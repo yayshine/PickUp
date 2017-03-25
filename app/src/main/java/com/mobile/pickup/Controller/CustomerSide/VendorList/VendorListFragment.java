@@ -12,8 +12,8 @@ import android.widget.ListView;
 
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+import com.mobile.pickup.model.CustomerSide.VendorList.VendorListHeader;
+import com.mobile.pickup.model.CustomerSide.VendorList.VendorListItem;
 import com.mobile.pickup.R;
 
 /**

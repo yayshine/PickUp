@@ -2,7 +2,7 @@ package com.mobile.pickup;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mobile.pickup.Model.FoodItem;
+import com.mobile.pickup.model.FoodItem;
 
 /**
  * Created by Yanqing on 3/24/17.

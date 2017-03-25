@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+import com.mobile.pickup.model.CustomerSide.VendorList.VendorListItem;
 import com.mobile.pickup.R;
 
 /**

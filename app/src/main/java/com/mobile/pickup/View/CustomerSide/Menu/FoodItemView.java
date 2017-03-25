@@ -9,7 +9,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
-import com.mobile.pickup.Model.FoodItem;
+import com.mobile.pickup.model.FoodItem;
 import com.mobile.pickup.R;
 
 /**

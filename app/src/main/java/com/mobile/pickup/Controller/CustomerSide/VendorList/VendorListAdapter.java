@@ -4,8 +4,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+import com.mobile.pickup.model.CustomerSide.VendorList.VendorListHeader;
+import com.mobile.pickup.model.CustomerSide.VendorList.VendorListItem;
 import com.mobile.pickup.View.CustomerSide.VendorList.VendorListHeaderView;
 import com.mobile.pickup.View.CustomerSide.VendorList.VendorListItemView;
 

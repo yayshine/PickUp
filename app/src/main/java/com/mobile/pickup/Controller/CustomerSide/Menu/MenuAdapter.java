@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.mobile.pickup.Model.FoodItem;
+import com.mobile.pickup.model.FoodItem;
 import com.mobile.pickup.View.CustomerSide.Menu.FoodItemView;
 
 import java.util.ArrayList;
