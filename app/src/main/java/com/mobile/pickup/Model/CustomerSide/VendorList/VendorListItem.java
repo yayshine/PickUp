@@ -1,4 +1,4 @@
-package com.mobile.pickup.model.CustomerSide.VendorList;
+package com.mobile.pickup.Model.CustomerSide.VendorList;
 
 /**
  * Created by yayshin on 3/23/17.

@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.mobile.pickup.Model.Vendor;
+
 import com.mobile.pickup.View.CustomerSide.VendorList.VendorListItemView;
 
 import java.util.ArrayList;

@@ -5,6 +5,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.mobile.pickup.Model.Vendor;
+
 import com.mobile.pickup.R;
 
 /**
