@@ -1,4 +1,4 @@
-package com.mobile.pickup.model;
+package com.mobile.pickup2.model;
 
 /**
  * Created by Yanqing on 3/24/17.

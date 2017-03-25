@@ -1,4 +1,4 @@
-package com.mobile.pickup.model;
+package com.mobile.pickup2.model;
 
 import java.util.List;
 
