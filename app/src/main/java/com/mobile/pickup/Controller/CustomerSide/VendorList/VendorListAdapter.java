@@ -19,9 +19,6 @@ import java.util.List;
 
 public class VendorListAdapter extends BaseAdapter {
 
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_HEADER = 1;
-
     List<Vendor> items = new ArrayList<>();
 
     public VendorListAdapter(Vendor[] vendors){

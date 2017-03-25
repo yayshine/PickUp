@@ -16,6 +16,36 @@
             android:layout_centerHorizontal="true"
             android:text="Order from ..." />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/text_vendor_name"
+            android:id="@+id/review_label">
+
+            <TextView
+                android:id="@+id/text_name_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorAccent"
+                android:text="name" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:text="price" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:text="quantity" />
+            />
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/btn_pay"
             android:layout_width="wrap_content"
@@ -46,10 +76,11 @@
             android:id="@+id/list_review"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/text_vendor_name"
+            android:layout_below="@+id/review_label"
             android:layout_above="@+id/text_total_label"
             android:layout_centerHorizontal="true"
-            android:clickable="false" />
+            android:clickable="false"
+            />
 
     </RelativeLayout>
 

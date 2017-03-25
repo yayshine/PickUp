@@ -12,8 +12,14 @@
         android:text="Food" />
 
     <TextView
-        android:id="@+id/text_quantity"
+        android:id="@+id/text_price"
         android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="$" />
+
+    <TextView
+        android:id="@+id/text_quantity"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:text="0" />
 

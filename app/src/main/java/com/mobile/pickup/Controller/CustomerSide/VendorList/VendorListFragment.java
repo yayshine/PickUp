@@ -46,7 +46,6 @@ public class VendorListFragment extends Fragment {
         ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
 
         final VendorListAdapter adapter = new VendorListAdapter(mVendorList);
-
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

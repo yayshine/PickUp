@@ -27,7 +27,6 @@
 
     </LinearLayout>
 
-
     <ListView
         android:layout_below="@id/vendor_list_label"
         android:layout_width="match_parent"
