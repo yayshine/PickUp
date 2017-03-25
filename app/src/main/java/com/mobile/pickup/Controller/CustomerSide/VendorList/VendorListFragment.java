@@ -9,19 +9,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
+
 import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
 import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+
+
+import com.mobile.pickup.Model.Vendor;
+
+
 import com.mobile.pickup.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class VendorListFragment extends Fragment {
 
-    VendorListItem[] mVendorList;
+
+    List<Vendor> mVendorList = new ArrayList<Vendor>();
+
 
     public VendorListFragment() {
         // Required empty public constructor
@@ -31,10 +47,7 @@ public class VendorListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Dummy data for now
-        mVendorList = new VendorListItem[3];
-        mVendorList[0] = new VendorListItem("a", "Uncle Luoyang", 10);
-        mVendorList[1] = new VendorListItem("b", "Aunt HongKong", 15);
-        mVendorList[2] = new VendorListItem("c", "Granpa Macao", 20);
+
     }
 
     @Override
@@ -42,7 +55,32 @@ public class VendorListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_vendor_list, container, false);
 
-        ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
+        ListView listView = (ListView) rootView.findViewById(R.id.list_vendor);
+
+        // yanqing
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Vendor");
+
+        ValueEventListener postListener = new ValueEventListener() {
+            // @Override
+// public void onDataChange(DataSnapshot dataSnapshot) {
+// // Get Post object and use the values to update the UI
+// }
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
+                    Vendor vendor = child.getValue(Vendor.class);
+                    mVendorList.add(vendor);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        mDatabase.addValueEventListener(postListener);
+
 
         final VendorListAdapter adapter = new VendorListAdapter(mVendorList);
         adapter.addHeaderItem(new VendorListHeader("name", "wait time"));
@@ -53,6 +91,7 @@ public class VendorListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 OrderActivity.mOrder.setVendorID(((VendorListItem)adapter.getItem(position)).id);
+//                OrderActivity.mTempOrder.setVendor(((Vendor) adapter.getItem(position)));
 
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()

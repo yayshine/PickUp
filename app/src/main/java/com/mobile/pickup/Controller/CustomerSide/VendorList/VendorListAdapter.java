@@ -6,6 +6,7 @@ import android.widget.BaseAdapter;
 
 import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
 import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.View.CustomerSide.VendorList.VendorListHeaderView;
 import com.mobile.pickup.View.CustomerSide.VendorList.VendorListItemView;
 
@@ -25,14 +26,15 @@ public class VendorListAdapter extends BaseAdapter {
 
     List<VendorListItem> items = new ArrayList<>();
 
-    public VendorListAdapter(VendorListItem[] foodtrucks){
-        addItems(foodtrucks);
+
+    public VendorListAdapter(List<Vendor> vendors){
+        addItems(vendors);
     }
 
-    private void addItems(VendorListItem[] foodtrucks){
+    private void addItems(List<Vendor> foodtrucks){
         // add foodtrucks
-        for(int i = 0; i < foodtrucks.length; i++){
-            items.add(foodtrucks[i]);
+        for(int i = 0; i < foodtrucks.size(); i++){
+//            items.add(foodtrucks.get(i));
         }
         sortItems();
     }
