@@ -1,8 +1,13 @@
-package com.mobile.pickup.Customer;
+package com.mobile.pickup.Controller.CustomerSide.VendorList;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
+import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+import com.mobile.pickup.View.CustomerSide.VendorList.VendorListHeaderView;
+import com.mobile.pickup.View.CustomerSide.VendorList.VendorListItemView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +46,16 @@ public class VendorListAdapter extends BaseAdapter {
         Collections.sort(items, new Comparator<VendorListItem>() {
             @Override
             public int compare(VendorListItem o1, VendorListItem o2) {
-                return o1.id - o2.id;
+                if(o1 instanceof VendorListHeader && o2 instanceof VendorListHeader) {
+                    return ((VendorListHeader)o1).nameLabel.compareTo(((VendorListHeader)o2).nameLabel);
+                }
+                if(o1 instanceof VendorListHeader){
+                    return -1;
+                }
+                if(o2 instanceof VendorListHeader){
+                    return 1;
+                }
+                return o1.name.compareTo(o2.name);
             }
         });
 

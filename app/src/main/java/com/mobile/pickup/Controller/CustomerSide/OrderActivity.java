@@ -1,14 +1,19 @@
-package com.mobile.pickup.Customer;
+package com.mobile.pickup.Controller.CustomerSide;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
+import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.R;
 
 public class OrderActivity extends AppCompatActivity {
+    public static final String TAG_VENDOR_LIST = "VENDOR_LIST";
+    public static final String TAG_MENU = "MENU";
 
-    FragmentManager mFragmentManager;
+    public FragmentManager mFragmentManager;
+    public static Order mOrder = new Order();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

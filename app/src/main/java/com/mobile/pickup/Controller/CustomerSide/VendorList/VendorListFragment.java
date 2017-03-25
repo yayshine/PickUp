@@ -1,4 +1,4 @@
-package com.mobile.pickup.Customer;
+package com.mobile.pickup.Controller.CustomerSide.VendorList;
 
 
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
+import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
+import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
+import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
 import com.mobile.pickup.R;
 
 /**
@@ -17,7 +21,7 @@ import com.mobile.pickup.R;
  */
 public class VendorListFragment extends Fragment {
 
-    VendorListItem[] mFTList;
+    VendorListItem[] mVendorList;
 
     public VendorListFragment() {
         // Required empty public constructor
@@ -27,10 +31,10 @@ public class VendorListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Dummy data for now
-        mFTList = new VendorListItem[3];
-        mFTList[0] = new VendorListItem(0, "Uncle Luoyang", 10);
-        mFTList[1] = new VendorListItem(1, "Aunt HongKong", 15);
-        mFTList[2] = new VendorListItem(2, "Granpa Macao", 20);
+        mVendorList = new VendorListItem[3];
+        mVendorList[0] = new VendorListItem(0, "Uncle Luoyang", 10);
+        mVendorList[1] = new VendorListItem(1, "Aunt HongKong", 15);
+        mVendorList[2] = new VendorListItem(2, "Granpa Macao", 20);
     }
 
     @Override
@@ -40,7 +44,7 @@ public class VendorListFragment extends Fragment {
 
         ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
 
-        VendorListAdapter adapter = new VendorListAdapter(mFTList);
+        VendorListAdapter adapter = new VendorListAdapter(mVendorList);
         adapter.addHeaderItem(new VendorListHeader("name", "wait time"));
 
         listView.setAdapter(adapter);
@@ -49,6 +53,10 @@ public class VendorListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // navigate to next fragment
+                ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
+                        .addToBackStack(OrderActivity.TAG_VENDOR_LIST)
+                        .replace(R.id.container, new MenuFragment())
+                        .commit();
             }
         });
 

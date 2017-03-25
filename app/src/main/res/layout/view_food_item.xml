@@ -3,18 +3,23 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_name_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/colorAccent"
-        android:text="name" />
 
     <TextView
-        android:id="@+id/text_wait_time_label"
-        android:layout_width="100dp"
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:text="waitTime" />
+        android:layout_weight="1"
+        android:text="삼계탕" />
+
+    <TextView
+        android:id="@+id/text_price"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="$" />
+
+    <Spinner
+        android:id="@+id/spinner_quantity"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
