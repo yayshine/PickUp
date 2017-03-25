@@ -1,4 +1,4 @@
-package com.mobile.pickup.Model;
+package com.mobile.pickup.model;
 
 import java.util.HashMap;
 
