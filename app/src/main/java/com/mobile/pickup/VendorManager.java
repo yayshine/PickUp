@@ -2,7 +2,7 @@ package com.mobile.pickup;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mobile.pickup.Model.Vendor;
+import com.mobile.pickup.model.Vendor;
 
 /**
  * Created by Yanqing on 3/24/17.

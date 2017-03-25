@@ -2,7 +2,7 @@ package com.mobile.pickup;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mobile.pickup.Model.Order;
+import com.mobile.pickup.model.Order;
 
 import java.util.HashMap;
 
