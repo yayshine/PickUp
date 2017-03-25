@@ -54,8 +54,8 @@ public class VendorListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
-                        .addToBackStack(OrderActivity.TAG_VENDOR_LIST)
                         .replace(R.id.container, new MenuFragment())
+                        .addToBackStack(OrderActivity.TAG_VENDOR_LIST)
                         .commit();
             }
         });

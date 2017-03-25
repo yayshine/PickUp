@@ -13,12 +13,14 @@ public class OrderActivity extends AppCompatActivity {
     public static final String TAG_MENU = "MENU";
 
     public FragmentManager mFragmentManager;
-    public static Order mOrder = new Order();
+    public static Order mOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+        mOrder = new Order();
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.beginTransaction()
