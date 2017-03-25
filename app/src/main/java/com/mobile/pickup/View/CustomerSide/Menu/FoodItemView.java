@@ -42,9 +42,9 @@ public class FoodItemView extends FrameLayout {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int quantity = (int)parent.getSelectedItem();
                 if(quantity > 0) {
-                    OrderActivity.mOrder.getFoodItemIDQuantMap().put(foodItem.getFoodItemID(), quantity);
+                    OrderActivity.mTempOrder.getFoodItemQuantMap().put(foodItem, quantity);
                 }else{
-                    OrderActivity.mOrder.getFoodItemIDQuantMap().remove(foodItem.getFoodItemID());
+                    OrderActivity.mTempOrder.getFoodItemQuantMap().remove(foodItem);
                 }
             }
 

@@ -12,8 +12,7 @@ import android.widget.ListView;
 
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
+import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.R;
 
 /**
@@ -21,7 +20,7 @@ import com.mobile.pickup.R;
  */
 public class VendorListFragment extends Fragment {
 
-    VendorListItem[] mVendorList;
+    Vendor[] mVendorList;
 
     public VendorListFragment() {
         // Required empty public constructor
@@ -31,10 +30,10 @@ public class VendorListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Dummy data for now
-        mVendorList = new VendorListItem[3];
-        mVendorList[0] = new VendorListItem("a", "Uncle Luoyang", 10);
-        mVendorList[1] = new VendorListItem("b", "Aunt HongKong", 15);
-        mVendorList[2] = new VendorListItem("c", "Granpa Macao", 20);
+        mVendorList = new Vendor[3];
+        mVendorList[0] = new Vendor("a", "Uncle Luoyang", "aa", "9 AM - 5 PM", true);
+        mVendorList[1] = new Vendor("b", "Aunt HongKong", "bb", "9 AM - 5 PM", true);
+        mVendorList[2] = new Vendor("c", "Granpa Macao", "cc", "9 AM - 5 PM", true);
     }
 
     @Override
@@ -45,14 +44,13 @@ public class VendorListFragment extends Fragment {
         ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
 
         final VendorListAdapter adapter = new VendorListAdapter(mVendorList);
-        adapter.addHeaderItem(new VendorListHeader("name", "wait time"));
 
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                OrderActivity.mOrder.setVendorID(((VendorListItem)adapter.getItem(position)).id);
+                OrderActivity.mTempOrder.setVendor(((Vendor)adapter.getItem(position)));
 
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()

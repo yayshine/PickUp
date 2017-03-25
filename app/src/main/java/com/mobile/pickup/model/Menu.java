@@ -7,21 +7,21 @@ import java.util.HashMap;
  */
 
 public class Menu {
-    private String menuID;
+    private String id;
     private String vendorID;
     private HashMap<String, Boolean> foodItemIDVisibilityMap;
 
     public Menu() {
     }
 
-    public Menu(String menuID, String vendorID, HashMap<String, Boolean> foodItemIDVisibilityMap) {
-        this.menuID = menuID;
+    public Menu(String id, String vendorID, HashMap<String, Boolean> foodItemIDVisibilityMap) {
+        this.id = id;
         this.vendorID = vendorID;
         this.foodItemIDVisibilityMap = foodItemIDVisibilityMap;
     }
 
-    public String getMenuID() {
-        return menuID;
+    public String getID() {
+        return id;
     }
 
     public String getVendorID() {

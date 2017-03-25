@@ -5,8 +5,7 @@ package com.mobile.pickup.Model;
  */
 
 public class Vendor {
-
-    private String vendorID;
+    private String id;
     private String foodTruckName;
     private String menuID;
     private String operatingHours;
@@ -15,16 +14,16 @@ public class Vendor {
     public Vendor() {
     }
 
-    public Vendor(String vendorID, String foodTruckName, String menuID, String operatingHours, boolean isOpen) {
-        this.vendorID = vendorID;
+    public Vendor(String id, String foodTruckName, String menuID, String operatingHours, boolean isOpen) {
+        this.id = id;
         this.foodTruckName = foodTruckName;
         this.menuID = menuID;
         this.operatingHours = operatingHours;
         this.isOpen = isOpen;
     }
 
-    public String getVendorID() {
-        return vendorID;
+    public String getID() {
+        return id;
     }
 
     public String getFoodTruckName() {

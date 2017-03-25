@@ -5,7 +5,7 @@ package com.mobile.pickup.Model;
  */
 
 public class FoodItem {
-    private String foodItemID;
+    private String id;
     private String name;
     private float price;
     private String desc;
@@ -13,15 +13,15 @@ public class FoodItem {
     public FoodItem() {
     }
 
-    public FoodItem(String foodItemID, String name, float price, String desc) {
-        this.foodItemID = foodItemID;
+    public FoodItem(String id, String name, float price, String desc) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.desc = desc;
     }
 
-    public String getFoodItemID() {
-        return foodItemID;
+    public String getID() {
+        return id;
     }
 
     public String getName() {

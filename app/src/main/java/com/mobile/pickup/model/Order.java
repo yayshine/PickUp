@@ -9,10 +9,10 @@ import java.util.Map;
  */
 
 public class Order {
-    private String orderID;
+    private String id;
     private String customerID;
     private String vendorID;
-    private Map<String,Integer> foodItemIDQuantMap = new HashMap<>();
+    private Map<String,Integer> foodItemIDQuantMap;
     private boolean isReady;
     private int waitingTime;
     private long timeCreated;
@@ -21,10 +21,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(String orderID, String customerID, String vendorID,
+    public Order(String id, String customerID, String vendorID,
                  HashMap<String, Integer> foodItemIDQuantMap, boolean isReady,
                  int waitingTime, long timeCreated) {
-        this.orderID = orderID;
+        this.id = id;
         this.customerID = customerID;
         this.vendorID = vendorID;
         this.foodItemIDQuantMap = foodItemIDQuantMap;
@@ -33,8 +33,8 @@ public class Order {
         this.timeCreated = timeCreated;
     }
 
-    public String getOrderID() {
-        return orderID;
+    public String getID() {
+        return id;
     }
 
     public String getCustomerID() {
@@ -59,10 +59,6 @@ public class Order {
 
     public long getTimeCreated() {
         return timeCreated;
-    }
-
-    public void setVendorID(String vendorID) {
-        this.vendorID = vendorID;
     }
 }
 
