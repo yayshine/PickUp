@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
-import com.mobile.pickup.model.Order;
+import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.R;
 
 public class OrderActivity extends AppCompatActivity {
