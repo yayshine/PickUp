@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
@@ -39,16 +40,23 @@ public class ReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_review, container, false);
 
+        final TempOrder tempOrder = OrderActivity.mTempOrder;
+
+        TextView text_vendor_name = (TextView)rootView.findViewById(R.id.text_vendor_name);
+        text_vendor_name.setText("Order from "+tempOrder.getVendor().getFoodTruckName());
+
         ListView listView = (ListView)rootView.findViewById(R.id.list_review);
 
-        ReviewAdapter adapter = new ReviewAdapter(OrderActivity.mTempOrder.getFoodItemQuantMap().keySet().toArray());
+        ReviewAdapter adapter = new ReviewAdapter(tempOrder.getFoodItemQuantMap().keySet().toArray());
         listView.setAdapter(adapter);
+
+        TextView text_total_price = (TextView)rootView.findViewById(R.id.text_total_price);
+        text_total_price.setText("$ "+ adapter.getTotalPrice());
 
         Button btn_pay = (Button)rootView.findViewById(R.id.btn_pay);
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TempOrder tempOrder = OrderActivity.mTempOrder;
                 Vendor vendor = tempOrder.getVendor();
                 HashMap<String, Integer> foodItemIDQuantMap = new HashMap<>();
                 for(FoodItem foodItem : tempOrder.getFoodItemQuantMap().keySet()){
@@ -59,6 +67,8 @@ public class ReviewFragment extends Fragment {
                 OrderManager.addOrder("customer", vendor.getID(), foodItemIDQuantMap, 20, currentTime); // dummy data for now
 
                 ((OrderActivity) getActivity()).mFragmentManager.popBackStack(OrderActivity.TAG_VENDOR_LIST, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                OrderActivity.mTempOrder = new TempOrder();
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
                         .replace(R.id.container, new VendorListFragment())
                         .commit();

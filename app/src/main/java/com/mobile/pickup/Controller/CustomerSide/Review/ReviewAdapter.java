@@ -20,6 +20,7 @@ import java.util.List;
 public class ReviewAdapter extends BaseAdapter {
 
     List<FoodItem> items = new ArrayList<>();
+    private float totalPrice = 0;
 
     public ReviewAdapter(Object[] foodItems){
         addItems(foodItems);
@@ -28,7 +29,10 @@ public class ReviewAdapter extends BaseAdapter {
     private void addItems(Object[] foodItems){
         // add foodtrucks
         for(int i = 0; i < foodItems.length; i++){
-            items.add((FoodItem) foodItems[i]);
+            FoodItem foodItem = (FoodItem)foodItems[i];
+            items.add(foodItem);
+            int quantity = OrderActivity.mTempOrder.getFoodItemQuantMap().get(foodItem);
+            totalPrice += foodItem.getPrice() * quantity;
         }
         sortItems();
     }
@@ -43,6 +47,11 @@ public class ReviewAdapter extends BaseAdapter {
 
         notifyDataSetChanged();
     }
+
+    public float getTotalPrice (){
+        return totalPrice;
+    }
+
     @Override
     public int getCount() {
         return items.size();
