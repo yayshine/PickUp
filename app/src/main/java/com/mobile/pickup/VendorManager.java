@@ -1,14 +1,23 @@
 package com.mobile.pickup;
 
+import android.util.Log;
+
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Model.Vendor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yanqing on 3/24/17.
  */
 
 public final class VendorManager {
+
+    private static final String TAG = "VendorManager";
 
     public static Vendor addVendor(String foodTruckName, String menuID, String operatingHours, boolean isOpen){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -50,5 +59,29 @@ public final class VendorManager {
         DatabaseReference vendorRef = database.getReference("Vendor");
 
         vendorRef.child(vendorID).child("isOpen").setValue(isOpen);
+    }
+
+    public static List<Vendor> getAllVendors(){
+        final List<Vendor> vendorList = new ArrayList<>();
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Vendor");
+
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
+                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
+                    Vendor vendor = child.getValue(Vendor.class);
+                    vendorList.add(vendor);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "Your getAllVendors() failed.");
+            }
+        };
+        mDatabase.addValueEventListener(postListener);
+
+        return vendorList;
     }
 }
