@@ -43,15 +43,6 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Dummy data for now
-        mMenu = new FoodItem[3];
-        mMenu[0] = new FoodItem("a", "Hot and Sour Soup", 3.45f, "Spicy");
-        mMenu[1] = new FoodItem("b", "Minced Beef Chowder", 10.95f, "Minced Beef Chowder");
-        mMenu[2] = new FoodItem("c", "Tomato with Egg Drop Soup", 10.50f, "Tomato with Egg Drop Soup");
-
-        mFoodItemList.add(mMenu[0]);
-        mFoodItemList.add(mMenu[1]);
-        mFoodItemList.add(mMenu[2]);
     }
 
     @Override
