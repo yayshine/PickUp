@@ -18,17 +18,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Controller.CustomerSide.Review.ReviewFragment;
-import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.Model.Menu;
-import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +33,7 @@ public class MenuFragment extends Fragment {
 
     FoodItem[] mMenu;
     List<FoodItem> mFoodItemList = new ArrayList<>();
-    private String passedMenuID = "";
+    private String passedMenuID = OrderActivity.mTempOrder.getVendor().getMenuID();
 
 
     public MenuFragment() {
@@ -67,39 +63,29 @@ public class MenuFragment extends Fragment {
 
         final MenuAdapter adapter = new MenuAdapter(mFoodItemList);
 
-        // Yanqing - doesn't work yet
-//        final DatabaseReference mDatabaseReference;
-//        mDatabaseReference = FirebaseDatabase.getInstance().getReference(); // should be changed to a menuID passed in here
-//
-//        ValueEventListener menuListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                mFoodItemList.clear();
-//                Menu menu = dataSnapshot.child("Menu").child(passedMenuID).getValue(Menu.class);
-//                HashMap<String, Boolean> foodItemsIdList = menu.getFoodItemIDVisibilityMap();
-//                List<String> foodItemsIdToDisplay = new ArrayList<>();
-//                for (Map.Entry<String, Boolean> entry : foodItemsIdList.entrySet()) {
-//                    String foodItemID = entry.getKey();
-//                    boolean isDisplayed = entry.getValue();
-//                    if (isDisplayed == true){
-//                        foodItemsIdToDisplay.add(foodItemID);
-//                    }
-//                }
-//
-//                for (String foodItemID: foodItemsIdToDisplay) {
-//                    FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
-//                    mFoodItemList.add(foodItem);
-//                    //please update the adapter;
-//                    adapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.d("getMenu", "Display menu failed.");
-//            }
-//        };
-//        mDatabaseReference.addValueEventListener(menuListener);
+        final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        ValueEventListener menuListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Menu menu = dataSnapshot.child("Menu").child(passedMenuID).getValue(Menu.class);
+
+                Set<String> foodItemIDList = menu.getFoodItemIDVisibilityMap().keySet();
+                for(String foodItemID : foodItemIDList){
+                    if(menu.getFoodItemIDVisibilityMap().get(foodItemID) == true){
+                        FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
+                        mFoodItemList.add(foodItem);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("getMenu", "Display menu failed.");
+            }
+        };
+        mDatabaseReference.addValueEventListener(menuListener);
 
         listView.setAdapter(adapter);
 
