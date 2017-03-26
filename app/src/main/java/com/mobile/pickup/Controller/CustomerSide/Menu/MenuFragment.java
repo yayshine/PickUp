@@ -18,9 +18,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Controller.CustomerSide.Review.ReviewFragment;
+import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListAdapter;
+import com.mobile.pickup.MenuManager;
 import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.Model.Menu;
+import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.R;
+import com.mobile.pickup.VendorManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,18 +35,27 @@ import java.util.Set;
  */
 public class MenuFragment extends Fragment {
 
-    FoodItem[] mMenu;
-    List<FoodItem> mFoodItemList = new ArrayList<>();
+    List<FoodItem> mMenu = new ArrayList<>();
+
     private String passedMenuID = OrderActivity.mTempOrder.getVendor().getMenuID();
 
-
-    public MenuFragment() {
-        // Required empty public constructor
-    }
+    MenuAdapter mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // reading from Firebase server
+        MenuManager manager = new MenuManager();
+        mMenu = manager.getAllFoodItems(passedMenuID);
+
+        mAdapter = new MenuAdapter(mMenu);
+        manager.setOnFoodItemsReadListener(new MenuManager.OnFoodItemsReadListener() {
+            @Override
+            public void onFinish() {
+                mAdapter.update();
+            }
+        });
     }
 
     @Override
@@ -52,33 +65,7 @@ public class MenuFragment extends Fragment {
 
         ListView listView = (ListView)rootView.findViewById(R.id.list_menu);
 
-        final MenuAdapter adapter = new MenuAdapter(mFoodItemList);
-
-        final DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
-        ValueEventListener menuListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Menu menu = dataSnapshot.child("Menu").child(passedMenuID).getValue(Menu.class);
-
-                Set<String> foodItemIDList = menu.getFoodItemIDVisibilityMap().keySet();
-                for(String foodItemID : foodItemIDList){
-                    if(menu.getFoodItemIDVisibilityMap().get(foodItemID) == true){
-                        FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
-                        mFoodItemList.add(foodItem);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("getMenu", "Display menu failed.");
-            }
-        };
-        mDatabaseReference.addValueEventListener(menuListener);
-
-        listView.setAdapter(adapter);
+        listView.setAdapter(mAdapter);
 
         Button btn_checkout = (Button)rootView.findViewById(R.id.btn_checkout);
         btn_checkout.setOnClickListener(new View.OnClickListener() {
