@@ -37,15 +37,13 @@ public class MenuFragment extends Fragment {
 
     List<FoodItem> mMenu = new ArrayList<>();
 
-    String menuID;
-
     MenuAdapter mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        menuID = OrderActivity.mTempOrder.getVendor().getMenuID();
+        String menuID = OrderActivity.mTempOrder.getVendor().getMenuID();
 
         // reading from Firebase server
         MenuManager manager = new MenuManager();
