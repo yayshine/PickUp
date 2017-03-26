@@ -57,6 +57,7 @@ public class ReviewFragment extends Fragment {
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Vendor vendor = tempOrder.getVendor();
                 HashMap<String, Integer> foodItemIDQuantMap = new HashMap<>();
                 for(FoodItem foodItem : tempOrder.getFoodItemQuantMap().keySet()){
@@ -64,10 +65,10 @@ public class ReviewFragment extends Fragment {
                 }
                 long currentTime = System.currentTimeMillis();
 
-                OrderManager.addOrder("customer", vendor.getID(), foodItemIDQuantMap, 20, currentTime); // dummy data for now
+                OrderManager.addOrder("customer", vendor.getID(), foodItemIDQuantMap, 20, currentTime); // waiting time dummy data for now
 
+                // navigate to VendorListFragment and reset TempOrder
                 ((OrderActivity) getActivity()).mFragmentManager.popBackStack(OrderActivity.TAG_VENDOR_LIST, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
                 OrderActivity.mTempOrder = new TempOrder();
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
                         .replace(R.id.container, new VendorListFragment())
