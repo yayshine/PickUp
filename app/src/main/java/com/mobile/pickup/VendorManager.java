@@ -19,8 +19,9 @@ import java.util.List;
 public final class VendorManager {
 
     private static final String TAG = "VendorManager";
+    private OnVendorReadListener mListener;
 
-    public static Vendor addVendor(String foodTruckName, String menuID, String operatingHours, boolean isOpen){
+    public Vendor addVendor(String foodTruckName, String menuID, String operatingHours, boolean isOpen){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference vendorRef = database.getReference("Vendor");
 
@@ -31,7 +32,7 @@ public final class VendorManager {
         return nVendor;
     }
 
-    public static void updateFoodTruckName(String vendorID, String ftName){
+    public void updateFoodTruckName(String vendorID, String ftName){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference vendorRef = database.getReference("Vendor");
@@ -39,7 +40,7 @@ public final class VendorManager {
         vendorRef.child(vendorID).child("foodTruckName").setValue(ftName);
     }
 
-    public static void updateMenuID(String vendorID, String menuID){
+    public void updateMenuID(String vendorID, String menuID){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference vendorRef = database.getReference("Vendor");
@@ -47,7 +48,7 @@ public final class VendorManager {
         vendorRef.child(vendorID).child("menuID").setValue(menuID);
     }
 
-    public static void updateOperatingHours(String vendorID, String operatingHours){
+    public void updateOperatingHours(String vendorID, String operatingHours){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference vendorRef = database.getReference("Vendor");
@@ -55,35 +56,42 @@ public final class VendorManager {
         vendorRef.child(vendorID).child("operatingHours").setValue(operatingHours);
     }
 
-    public static void updateIsOpen(String vendorID, Boolean isOpen){
+    public void updateIsOpen(String vendorID, Boolean isOpen){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference vendorRef = database.getReference("Vendor");
 
         vendorRef.child(vendorID).child("isOpen").setValue(isOpen);
     }
 
-    public static List<Vendor> getAllVendors(){
-        final List<Vendor> vendorList = new ArrayList<>();
+    public List<Vendor> getAllVendors(){
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Vendor");
+        final List<Vendor> vendors = new ArrayList<>();
 
-        ValueEventListener postListener = new ValueEventListener() {
+        ValueEventListener vendorListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Vendor vendor = child.getValue(Vendor.class);
-                    vendorList.add(vendor);
-                    //please update the adapter;
+                    vendors.add(vendor);
                 }
+                mListener.onFinish();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG, "Your getAllVendors() failed.");
+                Log.d("getVendors", "Your getAllVendors() failed.");
             }
         };
-        mDatabase.addValueEventListener(postListener);
+        mDatabase.addValueEventListener(vendorListener);
+        return vendors;
+    }
 
-        return vendorList;
+    public void setOnVendorReadListener(OnVendorReadListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnVendorReadListener{
+        void onFinish();
     }
 }
