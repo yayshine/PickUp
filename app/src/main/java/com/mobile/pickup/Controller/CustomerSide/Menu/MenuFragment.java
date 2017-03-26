@@ -37,7 +37,7 @@ public class MenuFragment extends Fragment {
 
     List<FoodItem> mMenu = new ArrayList<>();
 
-    private String passedMenuID = OrderActivity.mTempOrder.getVendor().getMenuID();
+    String menuID;
 
     MenuAdapter mAdapter;
 
@@ -45,9 +45,11 @@ public class MenuFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        menuID = OrderActivity.mTempOrder.getVendor().getMenuID();
+
         // reading from Firebase server
         MenuManager manager = new MenuManager();
-        mMenu = manager.getAllFoodItems(passedMenuID);
+        mMenu = manager.getAllFoodItems(menuID);
 
         mAdapter = new MenuAdapter(mMenu);
         manager.setOnFoodItemsReadListener(new MenuManager.OnFoodItemsReadListener() {

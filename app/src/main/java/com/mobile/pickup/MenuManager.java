@@ -83,7 +83,7 @@ public class MenuManager {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("getMenu", "Display menu failed.");
+                Log.d("getAllFoodItems", "Display all food items failed.");
             }
         };
         mDatabaseReference.addValueEventListener(menuListener);
