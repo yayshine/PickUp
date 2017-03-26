@@ -63,7 +63,7 @@ public class VendorListFragment extends Fragment {
         ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
 
         final VendorListAdapter adapter = new VendorListAdapter(mVendorListList);
-//        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         // yanqing
         DatabaseReference mDatabase;
@@ -72,13 +72,11 @@ public class VendorListFragment extends Fragment {
         ValueEventListener vendorListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mVendorListList.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Vendor vendor = child.getValue(Vendor.class);
-                    mVendorListList.add(vendor);
-                    //please update the adapter;
-                    adapter.notifyDataSetChanged();
+                    adapter.addItem(vendor);
                 }
+                adapter.sortItems();
             }
 
             @Override
@@ -88,23 +86,15 @@ public class VendorListFragment extends Fragment {
         };
         mDatabase.addValueEventListener(vendorListener);
 
-        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 OrderActivity.mTempOrder.setVendor(((Vendor)adapter.getItem(position)));
 
-                // getting menu ID Yanqing
-                String idToSend = mVendorListList.get(position).getMenuID();
-                Bundle bundle = new Bundle();
-                bundle.putString(key, idToSend);
-                MenuFragment menuFragment = new MenuFragment();
-                menuFragment.setArguments(bundle);
-
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
-                        .replace(R.id.container, menuFragment)
+                        .replace(R.id.container, new MenuFragment())
                         .addToBackStack(OrderActivity.TAG_VENDOR_LIST)
                         .commit();
             }
