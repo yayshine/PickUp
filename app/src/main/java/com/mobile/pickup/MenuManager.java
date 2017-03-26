@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class MenuManager {
 
-    public static Menu addMenu(String vendorID, HashMap<String, Boolean> foodItemIDList){
+    public Menu addMenu(String vendorID, HashMap<String, Boolean> foodItemIDList){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference menuRef = database.getReference("Menu");
 
@@ -23,7 +23,7 @@ public class MenuManager {
         return nMenu;
     }
 
-    public static void updateVendorID(String menuID, String vendorID){
+    public void updateVendorID(String menuID, String vendorID){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference menuRef = database.getReference("Menu");
@@ -32,7 +32,7 @@ public class MenuManager {
     }
 
 
-    public static void addFoodItem(String menuID, String foodItemID){
+    public void addFoodItem(String menuID, String foodItemID){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference menuRef = database.getReference("Menu");
@@ -40,11 +40,11 @@ public class MenuManager {
         menuRef.child(menuID).child("foodItemIDList").child(foodItemID).setValue(true);
     }
 
-    public static void activateFoodItem(String menuID, String foodItemID){
+    public void activateFoodItem(String menuID, String foodItemID){
         addFoodItem(menuID,foodItemID);
     }
 
-    public static void deleteFoodItem(String menuID, String foodItemID){
+    public void deleteFoodItem(String menuID, String foodItemID){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference menuRef = database.getReference("Menu");
