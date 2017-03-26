@@ -18,12 +18,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Controller.CustomerSide.Review.ReviewFragment;
+import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 import com.mobile.pickup.Model.FoodItem;
+import com.mobile.pickup.Model.Menu;
 import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +36,9 @@ import java.util.List;
 public class MenuFragment extends Fragment {
 
     FoodItem[] mMenu;
-    List<FoodItem> mMenuList = new ArrayList<>();
+    List<FoodItem> mFoodItemList = new ArrayList<>();
+    private String passedMenuID = "";
+
 
     public MenuFragment() {
         // Required empty public constructor
@@ -46,9 +53,20 @@ public class MenuFragment extends Fragment {
         mMenu[1] = new FoodItem("b", "Minced Beef Chowder", 10.95f, "Minced Beef Chowder");
         mMenu[2] = new FoodItem("c", "Tomato with Egg Drop Soup", 10.50f, "Tomato with Egg Drop Soup");
 
-        mMenuList.add(mMenu[0]);
-        mMenuList.add(mMenu[1]);
-        mMenuList.add(mMenu[2]);
+        mFoodItemList.add(mMenu[0]);
+        mFoodItemList.add(mMenu[1]);
+        mFoodItemList.add(mMenu[2]);
+
+        // Open the bundle - Yanqing
+        Bundle bundle = getArguments();
+        if (getArguments() != null){
+            passedMenuID = getArguments().getString(VendorListFragment.key);
+            System.out.println(passedMenuID);
+        }
+        else{
+            System.out.println("bundle is null");
+        }
+
     }
 
     @Override
@@ -58,19 +76,30 @@ public class MenuFragment extends Fragment {
 
         ListView listView = (ListView)rootView.findViewById(R.id.list_menu);
 
-        MenuAdapter adapter = new MenuAdapter(mMenuList);
+        final MenuAdapter adapter = new MenuAdapter(mFoodItemList);
 
-        // Yanqing
-        DatabaseReference mDatabase;
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Menu");
-
+        // Yanqing - doesn't work yet
+//        final DatabaseReference mDatabaseReference;
+//        mDatabaseReference = FirebaseDatabase.getInstance().getReference(); // should be changed to a menuID passed in here
+//
 //        ValueEventListener menuListener = new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
-//                mVendorListList.clear();
-//                for (DataSnapshot child : dataSnapshot.getChildren()) {
-//                    Vendor vendor = child.getValue(Vendor.class);
-//                    mVendorListList.add(vendor);
+//                mFoodItemList.clear();
+//                Menu menu = dataSnapshot.child("Menu").child(passedMenuID).getValue(Menu.class);
+//                HashMap<String, Boolean> foodItemsIdList = menu.getFoodItemIDVisibilityMap();
+//                List<String> foodItemsIdToDisplay = new ArrayList<>();
+//                for (Map.Entry<String, Boolean> entry : foodItemsIdList.entrySet()) {
+//                    String foodItemID = entry.getKey();
+//                    boolean isDisplayed = entry.getValue();
+//                    if (isDisplayed == true){
+//                        foodItemsIdToDisplay.add(foodItemID);
+//                    }
+//                }
+//
+//                for (String foodItemID: foodItemsIdToDisplay) {
+//                    FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
+//                    mFoodItemList.add(foodItem);
 //                    //please update the adapter;
 //                    adapter.notifyDataSetChanged();
 //                }
@@ -78,11 +107,10 @@ public class MenuFragment extends Fragment {
 //
 //            @Override
 //            public void onCancelled(DatabaseError databaseError) {
-//                Log.d("getVendors", "Your getAllVendors() failed.");
+//                Log.d("getMenu", "Display menu failed.");
 //            }
 //        };
-//        mDatabase.addValueEventListener(postListener);
-
+//        mDatabaseReference.addValueEventListener(menuListener);
 
         listView.setAdapter(adapter);
 

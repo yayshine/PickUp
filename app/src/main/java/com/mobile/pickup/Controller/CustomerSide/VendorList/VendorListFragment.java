@@ -31,6 +31,8 @@ import java.util.List;
  */
 public class VendorListFragment extends Fragment {
 
+    public static String key = "MENU_ID";
+
     Vendor[] mVendorList;
     List<Vendor> mVendorListList = new ArrayList<>();
 
@@ -93,9 +95,16 @@ public class VendorListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 OrderActivity.mTempOrder.setVendor(((Vendor)adapter.getItem(position)));
 
+                // getting menu ID Yanqing
+                String idToSend = mVendorListList.get(position).getMenuID();
+                Bundle bundle = new Bundle();
+                bundle.putString(key, idToSend);
+                MenuFragment menuFragment = new MenuFragment();
+                menuFragment.setArguments(bundle);
+
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
-                        .replace(R.id.container, new MenuFragment())
+                        .replace(R.id.container, menuFragment)
                         .addToBackStack(OrderActivity.TAG_VENDOR_LIST)
                         .commit();
             }
