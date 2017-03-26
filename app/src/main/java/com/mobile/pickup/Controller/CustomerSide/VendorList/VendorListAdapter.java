@@ -21,28 +21,28 @@ public class VendorListAdapter extends BaseAdapter {
 
     List<Vendor> items = new ArrayList<>();
 
-    public VendorListAdapter(Vendor[] vendors){
-        addItems(vendors);
+    public VendorListAdapter(List<Vendor> vendors){
+        items = vendors;
     }
 
-    private void addItems(Vendor[] foodtrucks){
-        // add foodtrucks
-        for(int i = 0; i < foodtrucks.length; i++){
-            items.add(foodtrucks[i]);
-        }
-        sortItems();
-    }
-
-    private void sortItems(){
-        Collections.sort(items, new Comparator<Vendor>() {
-            @Override
-            public int compare(Vendor o1, Vendor o2) {
-                return o1.getID().compareTo(o2.getID());
-            }
-        });
-
-        notifyDataSetChanged();
-    }
+//    private void addItems(Vendor[] foodtrucks){
+//        // add foodtrucks
+//        for(int i = 0; i < foodtrucks.length; i++){
+//            items.add(foodtrucks[i]);
+//        }
+//        sortItems();
+//    }
+//
+//    private void sortItems(){
+//        Collections.sort(items, new Comparator<Vendor>() {
+//            @Override
+//            public int compare(Vendor o1, Vendor o2) {
+//                return o1.getID().compareTo(o2.getID());
+//            }
+//        });
+//
+//        notifyDataSetChanged();
+//    }
 
     @Override
     public int getCount() {
