@@ -37,6 +37,8 @@ public class VendorListFragment extends Fragment {
 
     Vendor[] mVendorList;
 
+    List<Vendor> mList = new ArrayList<>();
+
     public VendorListFragment() {
         // Required empty public constructor
     }
@@ -45,18 +47,6 @@ public class VendorListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Dummy data for now
-        mVendorList = new Vendor[3];
-        mVendorList[0] = new Vendor("a", "Uncle Luoyang", "aa", "9 AM - 5 PM", true);
-        mVendorList[1] = new Vendor("b", "Aunt HongKong", "bb", "9 AM - 5 PM", true);
-        mVendorList[2] = new Vendor("c", "Granpa Macao", "cc", "9 AM - 5 PM", true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_vendor_list, container, false);
-
-        ListView listView = (ListView) rootView.findViewById(R.id.list_vendor);
 
         // yanqing
         DatabaseReference mDatabase;
@@ -71,7 +61,7 @@ public class VendorListFragment extends Fragment {
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
                     Vendor vendor = child.getValue(Vendor.class);
-//                    mVendorList.add(vendor);
+                    mList.add(vendor);
                 }
             }
 
@@ -82,6 +72,20 @@ public class VendorListFragment extends Fragment {
         };
         mDatabase.addValueEventListener(postListener);
 
+        for (int i=0; i<mList.size(); i++){
+            mVendorList[i] = mList.get(i);
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_vendor_list, container, false);
+
+        ListView listView = (ListView) rootView.findViewById(R.id.list_vendor);
+
+
 
         final VendorListAdapter adapter = new VendorListAdapter(mVendorList);
         listView.setAdapter(adapter);
@@ -90,7 +94,7 @@ public class VendorListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                OrderActivity.mOrder.setVendorID(((VendorListItem)adapter.getItem(position)).id);
-//                OrderActivity.mTempOrder.setVendor(((Vendor) adapter.getItem(position)));
+                OrderActivity.mTempOrder.setVendor(((Vendor) adapter.getItem(position)));
                 OrderActivity.mTempOrder.setVendor(((Vendor) adapter.getItem(position)));
 
                 // navigate to next fragment
