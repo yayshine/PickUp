@@ -56,17 +56,6 @@ public class MenuFragment extends Fragment {
         mFoodItemList.add(mMenu[0]);
         mFoodItemList.add(mMenu[1]);
         mFoodItemList.add(mMenu[2]);
-
-        // Open the bundle - Yanqing
-        Bundle bundle = getArguments();
-        if (getArguments() != null){
-            passedMenuID = getArguments().getString(VendorListFragment.key);
-            System.out.println(passedMenuID);
-        }
-        else{
-            System.out.println("bundle is null");
-        }
-
     }
 
     @Override
