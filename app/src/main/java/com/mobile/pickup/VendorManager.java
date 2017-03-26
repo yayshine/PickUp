@@ -2,6 +2,7 @@ package com.mobile.pickup;
 
 import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -68,10 +69,11 @@ public final class VendorManager {
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Vendor vendor = child.getValue(Vendor.class);
                     vendorList.add(vendor);
+                    //please update the adapter;
                 }
             }
 

@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,12 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
-
-
 import com.mobile.pickup.Model.Vendor;
-
 
 import com.mobile.pickup.R;
 
@@ -37,8 +32,7 @@ import java.util.List;
 public class VendorListFragment extends Fragment {
 
     Vendor[] mVendorList;
-
-    List<Vendor> mList = new ArrayList<>();
+    List<Vendor> mVendorListList = new ArrayList<>();
 
     public VendorListFragment() {
         // Required empty public constructor
@@ -48,35 +42,14 @@ public class VendorListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Dummy data for now
-
-        // yanqing
-        DatabaseReference mDatabase;
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Vendor");
-
-        ValueEventListener postListener = new ValueEventListener() {
-            // @Override
-// public void onDataChange(DataSnapshot dataSnapshot) {
-// // Get Post object and use the values to update the UI
-// }
-            @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot child : dataSnapshot.getChildren()) {
-                    Vendor vendor = child.getValue(Vendor.class);
-                    mList.add(vendor);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-
-            }
-        };
-        mDatabase.addValueEventListener(postListener);
-
-        for (int i=0; i<mList.size(); i++){
-            mVendorList[i] = mList.get(i);
-        }
+//        mVendorList = new Vendor[3];
+//        mVendorList[0] = new Vendor("a", "Uncle Luoyang", "aa", "9 AM - 5 PM", true);
+//        mVendorList[1] = new Vendor("b", "Aunt HongKong", "bb", "9 AM - 5 PM", true);
+//        mVendorList[2] = new Vendor("c", "Granpa Macao", "cc", "9 AM - 5 PM", true);
+//
+//        mVendorListList.add(mVendorList[0]);
+//        mVendorListList.add(mVendorList[1]);
+//        mVendorListList.add(mVendorList[2]);
 
     }
 
@@ -85,19 +58,40 @@ public class VendorListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_vendor_list, container, false);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.list_vendor);
+        ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
 
+        final VendorListAdapter adapter = new VendorListAdapter(mVendorListList);
+//        listView.setAdapter(adapter);
 
+        // yanqing
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Vendor");
 
-        final VendorListAdapter adapter = new VendorListAdapter(mVendorList);
+        ValueEventListener vendorListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mVendorListList.clear();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Vendor vendor = child.getValue(Vendor.class);
+                    mVendorListList.add(vendor);
+                    //please update the adapter;
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("getVendors", "Your getAllVendors() failed.");
+            }
+        };
+        mDatabase.addValueEventListener(vendorListener);
+
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                OrderActivity.mOrder.setVendorID(((VendorListItem)adapter.getItem(position)).id);
-                OrderActivity.mTempOrder.setVendor(((Vendor) adapter.getItem(position)));
-                OrderActivity.mTempOrder.setVendor(((Vendor) adapter.getItem(position)));
+                OrderActivity.mTempOrder.setVendor(((Vendor)adapter.getItem(position)));
 
                 // navigate to next fragment
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()

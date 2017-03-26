@@ -4,8 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListHeader;
-import com.mobile.pickup.Model.CustomerSide.VendorList.VendorListItem;
 import com.mobile.pickup.Model.Vendor;
 
 import com.mobile.pickup.View.CustomerSide.VendorList.VendorListItemView;
@@ -23,29 +21,28 @@ public class VendorListAdapter extends BaseAdapter {
 
     List<Vendor> items = new ArrayList<>();
 
-
-    public VendorListAdapter(Vendor[] vendors) {
-        addItems(vendors);
+    public VendorListAdapter(List<Vendor> vendors){
+        items = vendors;
     }
 
-    private void addItems(Vendor[] foodtrucks) {
-        // add foodtrucks
-        for (int i = 0; i < foodtrucks.length; i++) {
-//            items.add(foodtrucks.get(i));
-        }
-        sortItems();
-    }
-
-    private void sortItems() {
-        Collections.sort(items, new Comparator<Vendor>() {
-            @Override
-            public int compare(Vendor o1, Vendor o2) {
-                return o1.getID().compareTo(o2.getID());
-            }
-        });
-
-        notifyDataSetChanged();
-    }
+//    private void addItems(Vendor[] foodtrucks){
+//        // add foodtrucks
+//        for(int i = 0; i < foodtrucks.length; i++){
+//            items.add(foodtrucks[i]);
+//        }
+//        sortItems();
+//    }
+//
+//    private void sortItems(){
+//        Collections.sort(items, new Comparator<Vendor>() {
+//            @Override
+//            public int compare(Vendor o1, Vendor o2) {
+//                return o1.getID().compareTo(o2.getID());
+//            }
+//        });
+//
+//        notifyDataSetChanged();
+//    }
 
     @Override
     public int getCount() {
@@ -65,9 +62,9 @@ public class VendorListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         VendorListItemView view;
-        if (convertView != null && convertView instanceof VendorListItemView) {
-            view = (VendorListItemView) convertView;
-        } else {
+        if(convertView != null && convertView instanceof VendorListItemView){
+            view = (VendorListItemView)convertView;
+        }else{
             view = new VendorListItemView(parent.getContext());
         }
         view.setData(items.get(position));
