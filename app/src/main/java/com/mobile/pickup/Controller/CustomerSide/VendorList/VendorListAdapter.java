@@ -26,20 +26,19 @@ public class VendorListAdapter extends BaseAdapter {
         items = vendors;
     }
 
-    public void addItem(Vendor vendor){
-        items.add(vendor);
+    public void update(){
+        sortItems();
+        notifyDataSetChanged();
     }
 
     // sort vendors alphabetically
-    public void sortItems(){
+    private void sortItems(){
         Collections.sort(items, new Comparator<Vendor>() {
             @Override
             public int compare(Vendor o1, Vendor o2) {
                 return o1.getFoodTruckName().compareTo(o2.getFoodTruckName());
             }
         });
-
-        notifyDataSetChanged();
     }
 
     @Override
