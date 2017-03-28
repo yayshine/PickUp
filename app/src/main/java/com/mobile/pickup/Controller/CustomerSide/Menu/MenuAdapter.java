@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import com.mobile.pickup.Model.CustomerSide.Menu.MenuHeader;
 import com.mobile.pickup.Model.FoodItem;
 
+import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.View.CustomerSide.Menu.FoodItemView;
 import com.mobile.pickup.View.CustomerSide.Menu.MenuHeaderView;
 
@@ -26,31 +27,16 @@ public class MenuAdapter extends BaseAdapter{
 
     List<FoodItem> items = new ArrayList<>();
 
-    public MenuAdapter(FoodItem[] foodItems){
-        addItems(foodItems);
-    }
-
-    private void addItems(FoodItem[] foodItems){
-        // add foodItems
-        for(int i = 0; i < foodItems.length; i++){
-            items.add(foodItems[i]);
-        }
-        sortItems();
+    public MenuAdapter(List<FoodItem> menuList){
+        items = menuList;
     }
 
     public void addHeaderItem(MenuHeader header){
         items.add(header);
-        sortItems();
+        update();
     }
 
-    private void sortItems(){
-        Collections.sort(items, new Comparator<FoodItem>() {
-            @Override
-            public int compare(FoodItem o1, FoodItem o2) {
-                return o1.getID().compareTo(o2.getID());
-            }
-        });
-
+    public void update(){
         notifyDataSetChanged();
     }
 

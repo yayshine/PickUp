@@ -1,5 +1,6 @@
 package com.mobile.pickup.Controller.CustomerSide.VendorList;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,29 +20,25 @@ import java.util.List;
 
 public class VendorListAdapter extends BaseAdapter {
 
-    List<Vendor> items = new ArrayList<>();
+    List<Vendor> items;
 
-    public VendorListAdapter(Vendor[] vendors){
-        addItems(vendors);
+    public VendorListAdapter(List<Vendor> vendors){
+        items = vendors;
     }
 
-    private void addItems(Vendor[] foodtrucks){
-        // add foodtrucks
-        for(int i = 0; i < foodtrucks.length; i++){
-            items.add(foodtrucks[i]);
-        }
+    public void update(){
         sortItems();
+        notifyDataSetChanged();
     }
 
+    // sort vendors alphabetically
     private void sortItems(){
         Collections.sort(items, new Comparator<Vendor>() {
             @Override
             public int compare(Vendor o1, Vendor o2) {
-                return o1.getID().compareTo(o2.getID());
+                return o1.getFoodTruckName().compareTo(o2.getFoodTruckName());
             }
         });
-
-        notifyDataSetChanged();
     }
 
     @Override

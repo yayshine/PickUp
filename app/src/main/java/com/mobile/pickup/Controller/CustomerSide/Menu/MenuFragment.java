@@ -4,36 +4,58 @@ package com.mobile.pickup.Controller.CustomerSide.Menu;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Controller.CustomerSide.Review.ReviewFragment;
+import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListAdapter;
+import com.mobile.pickup.MenuManager;
 import com.mobile.pickup.Model.FoodItem;
+import com.mobile.pickup.Model.Menu;
+import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.R;
+import com.mobile.pickup.VendorManager;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MenuFragment extends Fragment {
 
-    FoodItem[] mMenu;
+    List<FoodItem> mMenu = new ArrayList<>();
 
-    public MenuFragment() {
-        // Required empty public constructor
-    }
+    MenuAdapter mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Dummy data for now
-        mMenu = new FoodItem[3];
-        mMenu[0] = new FoodItem("a", "Hot and Sour Soup", 3.45f, "Spicy");
-        mMenu[1] = new FoodItem("b", "Minced Beef Chowder", 10.95f, "Minced Beef Chowder");
-        mMenu[2] = new FoodItem("c", "Tomato with Egg Drop Soup", 10.50f, "Tomato with Egg Drop Soup");
+
+        String menuID = OrderActivity.mTempOrder.getVendor().getMenuID();
+
+        // reading from Firebase server
+        MenuManager manager = new MenuManager();
+        mMenu = manager.getAllFoodItems(menuID);
+
+        mAdapter = new MenuAdapter(mMenu);
+        manager.setOnFoodItemsReadListener(new MenuManager.OnFoodItemsReadListener() {
+            @Override
+            public void onFinish() {
+                mAdapter.update();
+            }
+        });
     }
 
     @Override
@@ -43,9 +65,7 @@ public class MenuFragment extends Fragment {
 
         ListView listView = (ListView)rootView.findViewById(R.id.list_menu);
 
-        MenuAdapter adapter = new MenuAdapter(mMenu);
-
-        listView.setAdapter(adapter);
+        listView.setAdapter(mAdapter);
 
         Button btn_checkout = (Button)rootView.findViewById(R.id.btn_checkout);
         btn_checkout.setOnClickListener(new View.OnClickListener() {
