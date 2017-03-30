@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.mobile.pickup.Controller.TempLoginActivity;
-import com.mobile.pickup.Controller.TempMainActivity;
 import com.mobile.pickup.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_v_main);
 
         Button btn_menu = (Button)findViewById(R.id.btn_menu);
 
@@ -23,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         btn_orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, VendorOrderActivity.class);
+                Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

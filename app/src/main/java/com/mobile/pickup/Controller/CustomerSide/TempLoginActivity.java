@@ -1,15 +1,12 @@
-package com.mobile.pickup.Controller;
+package com.mobile.pickup.Controller.CustomerSide;
 
-import android.app.Application;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.CustomerManager;
 import com.mobile.pickup.Model.Customer;
 import com.mobile.pickup.PropertyManager;
@@ -20,7 +17,7 @@ public class TempLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temp_login);
+        setContentView(R.layout.activity_c_temp_login);
 
         final EditText edit_username = (EditText)findViewById(R.id.edit_username);
 

@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.mobile.pickup.Controller.CustomerSide.TempLoginActivity;
 import com.mobile.pickup.Controller.VendorSide.MainActivity;
-import com.mobile.pickup.Controller.VendorSide.VendorOrderActivity;
 import com.mobile.pickup.R;
 
 public class TempMainActivity extends AppCompatActivity {
