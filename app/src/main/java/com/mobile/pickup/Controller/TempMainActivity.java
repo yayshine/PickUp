@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.mobile.pickup.Controller.VendorSide.VendorOrderActivity;
 import com.mobile.pickup.R;
 
 public class TempMainActivity extends AppCompatActivity {
@@ -25,5 +26,12 @@ public class TempMainActivity extends AppCompatActivity {
         });
 
         Button btn_vendor = (Button)findViewById(R.id.btn_vendor);
+        btn_vendor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TempMainActivity.this, VendorOrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
