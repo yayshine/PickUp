@@ -10,23 +10,24 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:name=".PickUpApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Controller.CustomerSide.OrderActivity">
+        </activity>
+        <activity android:name=".View.VendorSide.VendorOrderActivity" />
+        <activity android:name=".Controller.CustomerSide.ConfirmActivity" />
+        <activity android:name=".Controller.TempMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".View.VendorSide.VendorOrderActivity"></activity>
+        <activity android:name=".Controller.TempLoginActivity"></activity>
     </application>
 
 </manifest>

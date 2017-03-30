@@ -23,6 +23,7 @@ import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.OrderManager;
+import com.mobile.pickup.PropertyManager;
 import com.mobile.pickup.R;
 
 import java.util.HashMap;
@@ -59,6 +60,7 @@ public class ReviewFragment extends Fragment {
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String customerId = PropertyManager.getInstance().getID();
 
                 Vendor vendor = tempOrder.getVendor();
                 HashMap<String, Integer> foodItemIDQuantMap = new HashMap<>();
@@ -68,7 +70,7 @@ public class ReviewFragment extends Fragment {
                 long currentTime = System.currentTimeMillis();
                 int waitingTime = 20;
 
-                OrderManager.addOrder("customer", vendor.getID(), foodItemIDQuantMap, waitingTime, currentTime); // waiting time dummy data for now
+                OrderManager.addOrder(customerId, vendor.getID(), foodItemIDQuantMap, waitingTime, currentTime); // waiting time dummy data for now
 
                 // navigate to VendorListFragment and reset TempOrder
                 ((OrderActivity) getActivity()).mFragmentManager.popBackStack(OrderActivity.TAG_VENDOR_LIST, FragmentManager.POP_BACK_STACK_INCLUSIVE);
