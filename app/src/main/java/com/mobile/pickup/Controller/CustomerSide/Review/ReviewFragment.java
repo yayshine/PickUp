@@ -1,6 +1,7 @@
 package com.mobile.pickup.Controller.CustomerSide.Review;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mobile.pickup.Controller.CustomerSide.ConfirmActivity;
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListAdapter;
@@ -64,8 +66,9 @@ public class ReviewFragment extends Fragment {
                     foodItemIDQuantMap.put(foodItem.getID(), tempOrder.getFoodItemQuantMap().get(foodItem));
                 }
                 long currentTime = System.currentTimeMillis();
+                int waitingTime = 20;
 
-                OrderManager.addOrder("customer", vendor.getID(), foodItemIDQuantMap, 20, currentTime); // waiting time dummy data for now
+                OrderManager.addOrder("customer", vendor.getID(), foodItemIDQuantMap, waitingTime, currentTime); // waiting time dummy data for now
 
                 // navigate to VendorListFragment and reset TempOrder
                 ((OrderActivity) getActivity()).mFragmentManager.popBackStack(OrderActivity.TAG_VENDOR_LIST, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -73,6 +76,12 @@ public class ReviewFragment extends Fragment {
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
                         .replace(R.id.container, new VendorListFragment())
                         .commit();
+
+                Intent intent = new Intent(getActivity(), ConfirmActivity.class);
+                intent.putExtra(ConfirmActivity.TAG_ESTIMATED_TIME, currentTime + (waitingTime * 60000));
+                intent.putExtra(ConfirmActivity.TAG_CURRENT_TIME, currentTime);
+                startActivity(intent);
+
             }
         });
 
