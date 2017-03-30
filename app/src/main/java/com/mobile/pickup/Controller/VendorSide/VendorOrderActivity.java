@@ -10,7 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mobile.pickup.Model.Order;
+
+import com.mobile.pickup.Model.VendorSide.OrderListItem;
 import com.mobile.pickup.OrderManager;
 import com.mobile.pickup.R;
 
@@ -21,8 +22,9 @@ import java.util.List;
 public class VendorOrderActivity extends AppCompatActivity
 {
 
-    private List<Order> orders = new ArrayList<CustomerOrder>();
-    ArrayAdapter<Order> adapter1;
+    private List<OrderListItem> orders = new ArrayList<OrderListItem>();
+    ArrayAdapter<OrderListItem> adapter1;
+    String vendorID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,6 +32,7 @@ public class VendorOrderActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_order);
 
+        vendorID = "-Kfz4012r7qbR08higRA";
         //referencing activity_vendor_order.xml; write code here
         populateOrderList();
         createOrderObject();
@@ -65,17 +68,24 @@ public class VendorOrderActivity extends AppCompatActivity
 //
 //        orders.add(order2);orders.add(order2);
 //        orders.add(order2);orders.add(order2);orders.add(order2);orders.add(order2);
-        orders = OrderManager;
+        OrderManager manager = new OrderManager();
+        orders = manager.getAllActiveOrders(vendorID);
+        manager.setOnOrdersReadListener(new OrderManager.OnOrdersReadListener() {
+            @Override
+            public void onFinish() {
+             adapter1.notifyDataSetChanged();
+            }
+        });
     }
 
 
 
     //subclass MyListAdapter
-    private class MyListAdapter extends ArrayAdapter<CustomerOrder>
+    private class MyListAdapter extends ArrayAdapter<OrderListItem>
     {
        public MyListAdapter()
        {
-           super(VendorOrderActivity.this, R.layout.order_object_view, orders);
+           super(VendorOrderActivity.this, R.layout.view_order_list_item, orders);
        }
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
@@ -86,25 +96,33 @@ public class VendorOrderActivity extends AppCompatActivity
                 //if no order View, then "inflate" layout; create layout for us
                 //working on the parent view
                 //do not attach to root -- false
-                itemView = getLayoutInflater().inflate(R.layout.order_object_view, parent, false);
+                itemView = getLayoutInflater().inflate(R.layout.view_order_list_item, parent, false);
             }
             //get CustomerOrder from ArrayLIst according to position
-            CustomerOrder currentOrder = orders.get(position);
+            OrderListItem currentOrder = orders.get(position);
             ImageButton doneButton = (ImageButton) itemView.findViewById(R.id.done_button);
 
             //load current Order object's image into ImageButton; set listener
-            doneButton.setImageResource(currentOrder.getimgButtonID());
+
+            doneButton.setImageResource(R.drawable.done_button);
             MyOnClickListener listener = new MyOnClickListener(position);
             doneButton.setOnClickListener(listener);
 
             //sets crder# and customer name
-            String orderTitle = "Order#"+(int)(position+1) + ": " + orders.get(position).getcustomerName();
+            String orderTitle = "Order#"+(int)(position+1) + ": " + orders.get(position).getCustomerName();
             TextView customerName = (TextView) itemView.findViewById(R.id.customer_name);
             customerName.setText(orderTitle);
 
             //sets customer's foodList from the HashMap's keySet
             TextView foodList = (TextView) itemView.findViewById(R.id.food_list);
-            foodList.setText(orders.get(position).getFoodList());
+            //iterate through hashmap to get food list for each customer
+
+            String listString = "";
+            for (String i : currentOrder.getFoodItemNameQuantMap().keySet())
+            {
+                listString = listString + i + "\n";
+            }
+            foodList.setText(listString);
 
             return itemView;
         }

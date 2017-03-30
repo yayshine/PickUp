@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Controller.CustomerSide.OrderActivity">
         </activity>
-        <activity android:name=".View.VendorSide.VendorOrderActivity" />
+        <activity android:name=".Controller.VendorSide.VendorOrderActivity" />
         <activity android:name=".Controller.CustomerSide.ConfirmActivity" />
         <activity android:name=".Controller.TempMainActivity">
             <intent-filter>

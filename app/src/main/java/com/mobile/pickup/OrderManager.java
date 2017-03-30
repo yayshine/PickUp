@@ -8,11 +8,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Model.Customer;
-import com.mobile.pickup.Model.DisplayOrder;
+import com.mobile.pickup.Model.VendorSide.OrderListItem;
 import com.mobile.pickup.Model.FoodItem;
-import com.mobile.pickup.Model.Menu;
 import com.mobile.pickup.Model.Order;
-import com.mobile.pickup.Model.Vendor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +22,7 @@ import java.util.Set;
  */
 
 public class OrderManager {
-    private OnActiveOrdersReadListener oListener;
+    private OnOrdersReadListener mListener;
 
     public static Order addOrder(String customerID, String vendorID,
                                  HashMap<String, Integer> foodItemIDQuantMap,
@@ -46,9 +44,9 @@ public class OrderManager {
         orderRef.child(orderID).child("ready").setValue(isReady);
     }
 
-    public List<DisplayOrder> getAllActiveOrders(final String vendorID){
+    public List<OrderListItem> getAllActiveOrders(final String vendorID){
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        final List<DisplayOrder> customerOrders = new ArrayList<>();
+        final List<OrderListItem> customerOrders = new ArrayList<>();
 
         ValueEventListener orderListener = new ValueEventListener() {
             @Override
@@ -64,12 +62,12 @@ public class OrderManager {
                         HashMap<String, Integer> foodItemNameQuantMap = new HashMap<>();
                         FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
                         foodItemNameQuantMap.put(foodItem.getName(), order.getFoodItemIDQuantMap().get(foodItemID));
-                        DisplayOrder singleDisplayOrder = new DisplayOrder(customerName,foodItemNameQuantMap);
+                        OrderListItem singleDisplayOrder = new OrderListItem(customerName,foodItemNameQuantMap);
                         customerOrders.add(singleDisplayOrder);
                     }
                 }
 
-                oListener.onFinish();
+                mListener.onFinish();
             }
 
             @Override
@@ -81,11 +79,11 @@ public class OrderManager {
         return customerOrders;
     }
 
-    public void setOnFoodItemsReadListener(OnActiveOrdersReadListener listener) {
-        oListener = listener;
+    public void setOnOrdersReadListener(OnOrdersReadListener listener) {
+        mListener = listener;
     }
 
-    public interface OnActiveOrdersReadListener{
+    public interface OnOrdersReadListener{
         void onFinish();
     }
 }
