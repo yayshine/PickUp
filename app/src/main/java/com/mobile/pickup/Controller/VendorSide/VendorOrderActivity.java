@@ -24,6 +24,7 @@ public class VendorOrderActivity extends AppCompatActivity
 
     private List<OrderListItem> orders = new ArrayList<OrderListItem>();
     ArrayAdapter<OrderListItem> adapter1;
+    OrderManager manager;
     String vendorID;
 
     @Override
@@ -68,7 +69,7 @@ public class VendorOrderActivity extends AppCompatActivity
 //
 //        orders.add(order2);orders.add(order2);
 //        orders.add(order2);orders.add(order2);orders.add(order2);orders.add(order2);
-        OrderManager manager = new OrderManager();
+        manager = new OrderManager();
         orders = manager.getAllActiveOrders(vendorID);
         manager.setOnOrdersReadListener(new OrderManager.OnOrdersReadListener() {
             @Override
@@ -120,7 +121,7 @@ public class VendorOrderActivity extends AppCompatActivity
             String listString = "";
             for (String i : currentOrder.getFoodItemNameQuantMap().keySet())
             {
-                listString = listString + i + "\n";
+                listString = listString + i +  " x"+currentOrder.getFoodItemNameQuantMap().get(i)+ "\n";
             }
             foodList.setText(listString);
 
@@ -140,12 +141,15 @@ public class VendorOrderActivity extends AppCompatActivity
         //when ImageButton (ready) is clicked, remove the Order
         public void onClick(View v)
         {
-            //use Toast for debugging
-            //int printPos = pos+1;
+            //changed order Boolean to true (meaning that order was completed)
+            manager.updateIsReady(orders.get(pos).getOrderID(),true);
+
+            //removes from list locally and prints out removal message
             String removeMessage = "Finished Order#" + (int)(pos+1) + ". Removed from list!";
             Toast.makeText(VendorOrderActivity.this, removeMessage,Toast.LENGTH_LONG).show();
             adapter1.remove(orders.get(pos));
             adapter1.notifyDataSetChanged();
+
         }
     }
 
