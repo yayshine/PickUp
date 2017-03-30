@@ -1,6 +1,7 @@
 package com.mobile.pickup.Controller.CustomerSide.Review;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mobile.pickup.Controller.CustomerSide.ConfirmActivity;
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListAdapter;
@@ -21,6 +23,7 @@ import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.OrderManager;
+import com.mobile.pickup.PropertyManager;
 import com.mobile.pickup.R;
 
 import java.util.HashMap;
@@ -57,21 +60,30 @@ public class ReviewFragment extends Fragment {
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String customerId = PropertyManager.getInstance().getID();
+
                 Vendor vendor = tempOrder.getVendor();
                 HashMap<String, Integer> foodItemIDQuantMap = new HashMap<>();
                 for(FoodItem foodItem : tempOrder.getFoodItemQuantMap().keySet()){
                     foodItemIDQuantMap.put(foodItem.getID(), tempOrder.getFoodItemQuantMap().get(foodItem));
                 }
                 long currentTime = System.currentTimeMillis();
+                int waitingTime = 20;
 
-                OrderManager.addOrder("customer", vendor.getID(), foodItemIDQuantMap, 20, currentTime); // dummy data for now
+                OrderManager.addOrder(customerId, vendor.getID(), foodItemIDQuantMap, waitingTime, currentTime); // waiting time dummy data for now
 
+                // navigate to VendorListFragment and reset TempOrder
                 ((OrderActivity) getActivity()).mFragmentManager.popBackStack(OrderActivity.TAG_VENDOR_LIST, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
                 OrderActivity.mTempOrder = new TempOrder();
                 ((OrderActivity) getActivity()).mFragmentManager.beginTransaction()
                         .replace(R.id.container, new VendorListFragment())
                         .commit();
+
+                Intent intent = new Intent(getActivity(), ConfirmActivity.class);
+                intent.putExtra(ConfirmActivity.TAG_ESTIMATED_TIME, currentTime + (waitingTime * 60000));
+                intent.putExtra(ConfirmActivity.TAG_CURRENT_TIME, currentTime);
+                startActivity(intent);
+
             }
         });
 

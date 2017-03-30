@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--background="#0000" makes background transparent (removes ugly grey)-->
+    <ImageButton
+        android:id="@+id/done_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/done_button"
+        android:background="#0000"
+        android:adjustViewBounds="true"
+        android:maxWidth="70dp"
+        android:maxHeight="70dp"
+        android:scaleType="centerInside"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/customer_name"
+        android:text="customer name d w w w w w w w w w"
+        android:textSize="18sp"
+        android:maxWidth="190dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4sp"
+        android:maxLines="2"/>
+
+    <TextView
+        android:id="@+id/food_list"
+        android:text="food list WW w w w w  w w w"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif=light"
+        android:maxWidth="270dp"
+        android:paddingBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/customer_name"
+        />
+
+    <!-- Paid status commented out, b/c all orders are paid
+    <TextView
+        android:id="@+id/is_paid"
+        android:text="isPaid"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/done_button"
+        android:layout_toStartOf="@+id/done_button"
+        android:paddingRight="4sp"
+        android:paddingLeft="8sp"
+         /> -->
+
+</RelativeLayout>
