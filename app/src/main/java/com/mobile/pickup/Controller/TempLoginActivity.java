@@ -37,7 +37,7 @@ public class TempLoginActivity extends AppCompatActivity {
                 propertyManager.setID(tempCustomer.getID());
 
                 Intent intent = new Intent(TempLoginActivity.this, OrderActivity.class);
-                ActivityCompat.finishAffinity(TempLoginActivity.this);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
