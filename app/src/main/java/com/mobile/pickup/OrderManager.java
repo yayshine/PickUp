@@ -56,17 +56,16 @@ public class OrderManager {
                 for (DataSnapshot child : orderSnapshot.getChildren()) {
                     Order order = child.getValue(Order.class);
                     if (order.getVendorID().equals(vendorID) && (!order.isReady())){
-                        System.out.println(order.isReady());
                         Customer customer = dataSnapshot.child("Customer").child(order.getCustomerID()).getValue(Customer.class);
                         String customerName = customer.getCustomerName();
                         Set<String> foodItemIDList = order.getFoodItemIDQuantMap().keySet();
+                        HashMap<String, Integer> foodItemNameQuantMap = new HashMap<>();
                         for (String foodItemID: foodItemIDList) {
-                            HashMap<String, Integer> foodItemNameQuantMap = new HashMap<>();
                             FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
                             foodItemNameQuantMap.put(foodItem.getName(), order.getFoodItemIDQuantMap().get(foodItemID));
-                            OrderListItem singleDisplayOrder = new OrderListItem(order.getID(), customerName,foodItemNameQuantMap);
-                            customerOrders.add(singleDisplayOrder);
                         }
+                        OrderListItem singleDisplayOrder = new OrderListItem(order.getID(), customerName,foodItemNameQuantMap);
+                        customerOrders.add(singleDisplayOrder);
                     }
                 }
 
