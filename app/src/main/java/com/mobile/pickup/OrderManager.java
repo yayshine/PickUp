@@ -55,15 +55,17 @@ public class OrderManager {
 
                 for (DataSnapshot child : orderSnapshot.getChildren()) {
                     Order order = child.getValue(Order.class);
-                    Customer customer = dataSnapshot.child("Customer").child(order.getCustomerID()).getValue(Customer.class);
-                    String customerName = customer.getCustomerName();
-                    Set<String> foodItemIDList = order.getFoodItemIDQuantMap().keySet();
-                    for (String foodItemID: foodItemIDList) {
-                        HashMap<String, Integer> foodItemNameQuantMap = new HashMap<>();
-                        FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
-                        foodItemNameQuantMap.put(foodItem.getName(), order.getFoodItemIDQuantMap().get(foodItemID));
-                        OrderListItem singleDisplayOrder = new OrderListItem(customerName,foodItemNameQuantMap);
-                        customerOrders.add(singleDisplayOrder);
+                    if (order.getVendorID().equals(vendorID)){
+                        Customer customer = dataSnapshot.child("Customer").child(order.getCustomerID()).getValue(Customer.class);
+                        String customerName = customer.getCustomerName();
+                        Set<String> foodItemIDList = order.getFoodItemIDQuantMap().keySet();
+                        for (String foodItemID: foodItemIDList) {
+                            HashMap<String, Integer> foodItemNameQuantMap = new HashMap<>();
+                            FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
+                            foodItemNameQuantMap.put(foodItem.getName(), order.getFoodItemIDQuantMap().get(foodItemID));
+                            OrderListItem singleDisplayOrder = new OrderListItem(order.getID(), customerName,foodItemNameQuantMap);
+                            customerOrders.add(singleDisplayOrder);
+                        }
                     }
                 }
 
