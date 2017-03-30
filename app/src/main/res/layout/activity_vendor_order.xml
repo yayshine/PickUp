@@ -8,6 +8,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mobile.pickup.View.VendorSide.VendorOrderActivity">
+    tools:context="com.mobile.pickup.VendorOrderActivity">
 
+    <TextView
+        android:id="@+id/ordersView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Orders to Complete"
+         />
+
+    <ListView
+        android:id="@+id/order_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ordersView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
