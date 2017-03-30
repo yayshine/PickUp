@@ -55,7 +55,8 @@ public class OrderManager {
 
                 for (DataSnapshot child : orderSnapshot.getChildren()) {
                     Order order = child.getValue(Order.class);
-                    if (order.getVendorID().equals(vendorID)){
+                    if (order.getVendorID().equals(vendorID) && (!order.isReady())){
+                        System.out.println(order.isReady());
                         Customer customer = dataSnapshot.child("Customer").child(order.getCustomerID()).getValue(Customer.class);
                         String customerName = customer.getCustomerName();
                         Set<String> foodItemIDList = order.getFoodItemIDQuantMap().keySet();
