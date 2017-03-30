@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
+import com.mobile.pickup.CustomerManager;
 import com.mobile.pickup.Model.Customer;
 import com.mobile.pickup.PropertyManager;
 import com.mobile.pickup.R;
@@ -28,9 +29,9 @@ public class TempLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String username = edit_username.getText().toString();
-//                Need to implement CustomerManager
-//                Customer customer = CustomerManager.addCustomer(username);
-                Customer tempCustomer = new Customer("fake id", username);
+
+                Customer customer = CustomerManager.addCustomer(username);
+                Customer tempCustomer = new Customer(customer.getID(), username);
                 PropertyManager propertyManager = PropertyManager.getInstance();
                 propertyManager.setUsername(tempCustomer.getCustomerName());
                 propertyManager.setID(tempCustomer.getID());
