@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 
@@ -24,6 +25,7 @@ public class ReviewFragmentTest {
         long estimatedTime = fragment.genEstimatedTimeMillisecs(currentTime, 20);
         Date time = new Date(estimatedTime);
         DateFormat format = new SimpleDateFormat("hh:mm");
+        format.setTimeZone(TimeZone.getTimeZone("America/New_York"));
 
         assertEquals(format.format(time), "10:05");
     }
