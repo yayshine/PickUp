@@ -76,7 +76,7 @@ public class ReviewFragment extends Fragment {
                         .commit();
 
                 Intent intent = new Intent(getActivity(), ConfirmActivity.class);
-                intent.putExtra(ConfirmActivity.TAG_ESTIMATED_TIME, currentTime + (waitingTime * 60000));
+                intent.putExtra(ConfirmActivity.TAG_ESTIMATED_TIME, genEstimatedTimeMillisecs(currentTime, waitingTime));
                 intent.putExtra(ConfirmActivity.TAG_CURRENT_TIME, currentTime);
                 startActivity(intent);
 
@@ -84,6 +84,10 @@ public class ReviewFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    long genEstimatedTimeMillisecs(long currentTime, int waitingTimeInMins){
+        return currentTime + (waitingTimeInMins * 60000);
     }
 
 }
