@@ -51,11 +51,13 @@ public class OrderManager {
         ValueEventListener orderListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                customerOrders.clear();
                 DataSnapshot orderSnapshot = dataSnapshot.child("Order");
 
                 for (DataSnapshot child : orderSnapshot.getChildren()) {
                     Order order = child.getValue(Order.class);
-                    if (order.getVendorID().equals(vendorID) && (!order.isReady())){
+                    if (order.getVendorID().equals(vendorID) && (child.child("ready").getValue(Boolean.class) != true)){
+                        Boolean ready = order.isReady();
                         Customer customer = dataSnapshot.child("Customer").child(order.getCustomerID()).getValue(Customer.class);
                         String customerName = customer.getCustomerName();
                         Set<String> foodItemIDList = order.getFoodItemIDQuantMap().keySet();
