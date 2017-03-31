@@ -51,21 +51,23 @@ public class OrderManager {
         ValueEventListener orderListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                customerOrders.clear();
                 DataSnapshot orderSnapshot = dataSnapshot.child("Order");
 
                 for (DataSnapshot child : orderSnapshot.getChildren()) {
                     Order order = child.getValue(Order.class);
-                    if (order.getVendorID().equals(vendorID)){
+                    Boolean ready = order.getReady();
+                    if (order.getVendorID().equals(vendorID) && (!order.getReady())){
                         Customer customer = dataSnapshot.child("Customer").child(order.getCustomerID()).getValue(Customer.class);
                         String customerName = customer.getCustomerName();
                         Set<String> foodItemIDList = order.getFoodItemIDQuantMap().keySet();
+                        HashMap<String, Integer> foodItemNameQuantMap = new HashMap<>();
                         for (String foodItemID: foodItemIDList) {
-                            HashMap<String, Integer> foodItemNameQuantMap = new HashMap<>();
                             FoodItem foodItem = dataSnapshot.child("FoodItem").child(foodItemID).getValue(FoodItem.class);
                             foodItemNameQuantMap.put(foodItem.getName(), order.getFoodItemIDQuantMap().get(foodItemID));
-                            OrderListItem singleDisplayOrder = new OrderListItem(order.getID(), customerName,foodItemNameQuantMap);
-                            customerOrders.add(singleDisplayOrder);
                         }
+                        OrderListItem singleDisplayOrder = new OrderListItem(order.getID(), customerName,foodItemNameQuantMap);
+                        customerOrders.add(singleDisplayOrder);
                     }
                 }
 

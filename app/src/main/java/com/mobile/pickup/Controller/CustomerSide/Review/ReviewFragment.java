@@ -8,19 +8,15 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mobile.pickup.Controller.CustomerSide.ConfirmActivity;
-import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
-import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListAdapter;
 import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 import com.mobile.pickup.Model.CustomerSide.TempOrder;
 import com.mobile.pickup.Model.FoodItem;
-import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.OrderManager;
 import com.mobile.pickup.PropertyManager;
@@ -41,7 +37,7 @@ public class ReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_review, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_c_review, container, false);
 
         final TempOrder tempOrder = OrderActivity.mTempOrder;
 
@@ -80,7 +76,7 @@ public class ReviewFragment extends Fragment {
                         .commit();
 
                 Intent intent = new Intent(getActivity(), ConfirmActivity.class);
-                intent.putExtra(ConfirmActivity.TAG_ESTIMATED_TIME, currentTime + (waitingTime * 60000));
+                intent.putExtra(ConfirmActivity.TAG_ESTIMATED_TIME, genEstimatedTimeMillisecs(currentTime, waitingTime));
                 intent.putExtra(ConfirmActivity.TAG_CURRENT_TIME, currentTime);
                 startActivity(intent);
 
@@ -88,6 +84,10 @@ public class ReviewFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    long genEstimatedTimeMillisecs(long currentTime, int waitingTimeInMins){
+        return currentTime + (waitingTimeInMins * 60000);
     }
 
 }

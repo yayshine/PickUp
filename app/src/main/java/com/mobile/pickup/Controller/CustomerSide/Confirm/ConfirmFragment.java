@@ -7,15 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mobile.pickup.Controller.CustomerSide.ConfirmActivity;
-import com.mobile.pickup.Controller.CustomerSide.Menu.MenuAdapter;
-import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
-import com.mobile.pickup.Controller.CustomerSide.Review.ReviewFragment;
-import com.mobile.pickup.MenuManager;
 import com.mobile.pickup.R;
 
 import java.text.DateFormat;
@@ -35,12 +29,10 @@ public class ConfirmFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_confirm, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_c_confirm, container, false);
 
         long estimatedTime = getArguments().getLong(ConfirmActivity.TAG_ESTIMATED_TIME);
-        Date time = new Date(estimatedTime);
-        DateFormat formatter = new SimpleDateFormat("hh:mm a");
-        String estimatedTimeFormatted = formatter.format(time);
+        String estimatedTimeFormatted = genFormattedTimeString(estimatedTime);
 
         TextView text_estimated_time = (TextView) rootView.findViewById(R.id.text_estimated_time);
         text_estimated_time.setText(estimatedTimeFormatted);
@@ -48,4 +40,9 @@ public class ConfirmFragment extends Fragment {
         return rootView;
     }
 
+    String genFormattedTimeString(long timeInMillisecs){
+        Date time = new Date(timeInMillisecs);
+        DateFormat formatter = new SimpleDateFormat("hh:mm a");
+        return formatter.format(time);
+    }
 }

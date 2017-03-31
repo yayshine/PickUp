@@ -4,31 +4,20 @@ package com.mobile.pickup.Controller.CustomerSide.Menu;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Controller.CustomerSide.Review.ReviewFragment;
-import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListAdapter;
 import com.mobile.pickup.MenuManager;
 import com.mobile.pickup.Model.FoodItem;
-import com.mobile.pickup.Model.Menu;
-import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.R;
-import com.mobile.pickup.VendorManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +50,7 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_c_menu, container, false);
 
         ListView listView = (ListView)rootView.findViewById(R.id.list_menu);
 

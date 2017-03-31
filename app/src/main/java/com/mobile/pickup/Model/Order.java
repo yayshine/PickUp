@@ -12,7 +12,7 @@ public class Order {
     private String customerID;
     private String vendorID;
     private Map<String,Integer> foodItemIDQuantMap;
-    private boolean isReady;
+    private boolean ready;
     private int waitingTime;
     private long timeCreated;
 
@@ -27,7 +27,7 @@ public class Order {
         this.customerID = customerID;
         this.vendorID = vendorID;
         this.foodItemIDQuantMap = foodItemIDQuantMap;
-        this.isReady = isReady;
+        this.ready = isReady;
         this.waitingTime = waitingTime;
         this.timeCreated = timeCreated;
     }
@@ -48,8 +48,8 @@ public class Order {
         return foodItemIDQuantMap;
     }
 
-    public boolean isReady() {
-        return isReady;
+    public boolean getReady() {
+        return ready;
     }
 
     public int getWaitingTime() {

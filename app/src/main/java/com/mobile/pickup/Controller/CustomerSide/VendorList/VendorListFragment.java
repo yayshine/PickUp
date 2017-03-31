@@ -50,7 +50,7 @@ public class VendorListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_vendor_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_c_vendor_list, container, false);
 
         ListView listView = (ListView)rootView.findViewById(R.id.list_vendor);
 

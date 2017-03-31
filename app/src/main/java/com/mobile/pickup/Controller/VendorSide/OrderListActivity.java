@@ -16,10 +16,9 @@ import com.mobile.pickup.OrderManager;
 import com.mobile.pickup.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class VendorOrderActivity extends AppCompatActivity
+public class OrderListActivity extends AppCompatActivity
 {
 
     private List<OrderListItem> orders = new ArrayList<OrderListItem>();
@@ -31,10 +30,10 @@ public class VendorOrderActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vendor_order);
+        setContentView(R.layout.activity_v_order_list);
 
         vendorID = "-Kfz4012r7qbR08higRA";
-        //referencing activity_vendor_order.xml; write code here
+        //referencing activity_v_order_list.xml; write code here
         populateOrderList();
         createOrderObject();
     }
@@ -45,7 +44,6 @@ public class VendorOrderActivity extends AppCompatActivity
         adapter1 = new MyListAdapter();          //create array adaptor
         ListView orderList = (ListView) findViewById(R.id.order_list_view);  //create the list object
         orderList.setAdapter(adapter1);                                      //use List object to set
-
     }
 
 
@@ -86,7 +84,7 @@ public class VendorOrderActivity extends AppCompatActivity
     {
        public MyListAdapter()
        {
-           super(VendorOrderActivity.this, R.layout.view_order_list_item, orders);
+           super(OrderListActivity.this, R.layout.view_order_list_item, orders);
        }
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
@@ -146,7 +144,7 @@ public class VendorOrderActivity extends AppCompatActivity
 
             //removes from list locally and prints out removal message
             String removeMessage = "Finished Order#" + (int)(pos+1) + ". Removed from list!";
-            Toast.makeText(VendorOrderActivity.this, removeMessage,Toast.LENGTH_LONG).show();
+            Toast.makeText(OrderListActivity.this, removeMessage,Toast.LENGTH_LONG).show();
             adapter1.remove(orders.get(pos));
             adapter1.notifyDataSetChanged();
 
