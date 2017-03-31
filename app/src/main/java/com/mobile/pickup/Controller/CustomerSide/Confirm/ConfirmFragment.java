@@ -32,9 +32,7 @@ public class ConfirmFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_c_confirm, container, false);
 
         long estimatedTime = getArguments().getLong(ConfirmActivity.TAG_ESTIMATED_TIME);
-        Date time = new Date(estimatedTime);
-        DateFormat formatter = new SimpleDateFormat("hh:mm a");
-        String estimatedTimeFormatted = formatter.format(time);
+        String estimatedTimeFormatted = genFormattedTimeString(estimatedTime);
 
         TextView text_estimated_time = (TextView) rootView.findViewById(R.id.text_estimated_time);
         text_estimated_time.setText(estimatedTimeFormatted);
@@ -42,4 +40,9 @@ public class ConfirmFragment extends Fragment {
         return rootView;
     }
 
+    String genFormattedTimeString(long timeInMillisecs){
+        Date time = new Date(timeInMillisecs);
+        DateFormat formatter = new SimpleDateFormat("hh:mm a");
+        return formatter.format(time);
+    }
 }
