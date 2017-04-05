@@ -15,6 +15,7 @@ import com.mobile.pickup.R;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +44,7 @@ public class ConfirmFragment extends Fragment {
     String genFormattedTimeString(long timeInMillisecs){
         Date time = new Date(timeInMillisecs);
         DateFormat formatter = new SimpleDateFormat("hh:mm a");
+        formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
         return formatter.format(time);
     }
 }

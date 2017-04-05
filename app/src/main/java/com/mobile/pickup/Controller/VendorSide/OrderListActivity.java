@@ -23,6 +23,7 @@ public class OrderListActivity extends AppCompatActivity
 
     private List<OrderListItem> orders = new ArrayList<OrderListItem>();
     ArrayAdapter<OrderListItem> adapter1;
+    OrderManager manager;
     String vendorID;
 
     @Override
@@ -49,7 +50,24 @@ public class OrderListActivity extends AppCompatActivity
     //for now, ther are just arbitrary values to place into Order List
     private void populateOrderList()
     {
-        OrderManager manager = new OrderManager();
+//        //later populate using OrderManager.java
+//        HashMap<String, Integer> sotired = new HashMap<String,Integer>();
+//        sotired.put("ham", 3);
+//        sotired.put("dirt", 4);
+//        sotired.put("lol", 1);
+//        CustomerOrder order1 = new CustomerOrder("bob1 (name)",R.drawable.done_button,false,sotired);
+//        orders.add(order1);
+//
+//        HashMap<String, Integer> imsick = new HashMap<String,Integer>();
+//        imsick.put("ham", 3);
+//        imsick.put("dirt", 2);
+//        imsick.put("elephant", 9);
+//        CustomerOrder order2 = new CustomerOrder("bob2",R.drawable.done_button,false,imsick);
+//        orders.add(order2);
+//
+//        orders.add(order2);orders.add(order2);
+//        orders.add(order2);orders.add(order2);orders.add(order2);orders.add(order2);
+        manager = new OrderManager();
         orders = manager.getAllActiveOrders(vendorID);
         manager.setOnOrdersReadListener(new OrderManager.OnOrdersReadListener() {
             @Override
@@ -101,7 +119,7 @@ public class OrderListActivity extends AppCompatActivity
             String listString = "";
             for (String i : currentOrder.getFoodItemNameQuantMap().keySet())
             {
-                listString = listString + i + "\n";
+                listString = listString + i +  " x"+currentOrder.getFoodItemNameQuantMap().get(i)+ "\n";
             }
             foodList.setText(listString);
 
@@ -121,12 +139,15 @@ public class OrderListActivity extends AppCompatActivity
         //when ImageButton (ready) is clicked, remove the Order
         public void onClick(View v)
         {
-            //use Toast for debugging
-            //int printPos = pos+1;
+            //changed order Boolean to true (meaning that order was completed)
+            manager.updateIsReady(orders.get(pos).getOrderID(),true);
+
+            //removes from list locally and prints out removal message
             String removeMessage = "Finished Order#" + (int)(pos+1) + ". Removed from list!";
             Toast.makeText(OrderListActivity.this, removeMessage,Toast.LENGTH_LONG).show();
             adapter1.remove(orders.get(pos));
             adapter1.notifyDataSetChanged();
+
         }
     }
 
