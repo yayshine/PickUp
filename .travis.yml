@@ -27,4 +27,3 @@ before_script:
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
-  - psql -c "CREATE USER skateparks WITH PASSWORD 'skateparks';" -U postgres
