@@ -1,14 +1,18 @@
 package com.mobile.pickup;
 
+import android.support.test.runner.AndroidJUnit4;
+
 import com.mobile.pickup.Model.FoodItem;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by Yanqing on 4/5/17.
  */
+@RunWith(AndroidJUnit4.class)
 public class FoodItemManagerTest {
     // test addFoodItem() and getters of FoodItem class
     @Test

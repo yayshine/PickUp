@@ -1,16 +1,20 @@
 package com.mobile.pickup;
 
+import android.support.test.runner.AndroidJUnit4;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mobile.pickup.Model.Customer;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by Yanqing on 4/5/17.
  */
+@RunWith(AndroidJUnit4.class)
 public class CustomerManagerTest {
     // test addCustomer function and getters of Customer class
     @Test

@@ -1,14 +1,18 @@
 package com.mobile.pickup;
 
+import android.support.test.runner.AndroidJUnit4;
+
 import com.mobile.pickup.Model.Vendor;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by Yanqing on 3/30/17.
  */
+@RunWith(AndroidJUnit4.class)
 public class VendorManagerTest {
     private Vendor testVendor = new Vendor();
     // test addVendor() using dummy menu data, getter from Vendor class

@@ -1,10 +1,13 @@
 package com.mobile.pickup;
 
+import android.support.test.runner.AndroidJUnit4;
+
 import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.Model.Menu;
 import com.mobile.pickup.Model.Vendor;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.HashMap;
 
@@ -13,6 +16,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Yanqing on 4/5/17.
  */
+@RunWith(AndroidJUnit4.class)
 public class MenuManagerTest {
     // test addMenu() after using addVendor() from VendorManager Module
     // and getters from Menu and Vendor class
