@@ -14,6 +14,8 @@ import static org.junit.Assert.*;
  * Created by Yanqing on 4/5/17.
  */
 public class MenuManagerTest {
+    // test addMenu() after using addVendor() from VendorManager Module
+    // and getters from Menu and Vendor class
     @Test
     public void addMenu() throws Exception {
         VendorManager tVendorManager = new VendorManager();
@@ -27,6 +29,7 @@ public class MenuManagerTest {
         assert (tMenu.getFoodItemIDVisibilityMap().equals(tFoodItemIDList));
     }
 
+    // test updateVendorID() after using addVendor() and getters from Menu and Vendor class
     @Test
     public void updateVendorID() throws Exception {
         VendorManager tVendorManager = new VendorManager();
@@ -41,6 +44,7 @@ public class MenuManagerTest {
         assert (tMenu.getVendorID().equals(tVendor1.getID()));
     }
 
+    // test addFoodItem() using all above methods and getters
     @Test
     public void addFoodItem() throws Exception {
         VendorManager tVendorManager = new VendorManager();
@@ -57,6 +61,8 @@ public class MenuManagerTest {
         assert (tMenu.getFoodItemIDVisibilityMap().get(tFoodItem.getID()) == true);
     }
 
+    // testing deleteFoodItem() and activateFoodItem()
+    // by deleting first and then add back
     @Test
     public void activateAndDeleteFoodItem() throws Exception {
         VendorManager tVendorManager = new VendorManager();

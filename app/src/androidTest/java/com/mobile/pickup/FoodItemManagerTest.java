@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
  * Created by Yanqing on 4/5/17.
  */
 public class FoodItemManagerTest {
+    // test addFoodItem() and getters of FoodItem class
     @Test
     public void addFoodItem() throws Exception {
         FoodItem tFoodItem = FoodItemManager.addFoodItem("testFood", 2.3f, "test desc");
@@ -19,6 +20,7 @@ public class FoodItemManagerTest {
         assert (tFoodItem.getDesc().equals("test desc"));
     }
 
+    // test updateFoodItem() after using addFoodItem() and getters
     @Test
     public void updateFoodItem() throws Exception {
         FoodItem tFoodItem = FoodItemManager.addFoodItem("testFood", 2.3f, "test desc");

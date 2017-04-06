@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
  */
 public class VendorManagerTest {
     private Vendor testVendor = new Vendor();
+    // test addVendor() using dummy menu data, getter from Vendor class
     @Test
     public void addVendor() throws Exception {
         VendorManager vendorManager = new VendorManager();
@@ -18,6 +19,7 @@ public class VendorManagerTest {
         assert (testVendor.getID() != null);
     }
 
+    // test updateFoodTruckName() using dummy menu data, addVendor() and getter from Vendor class
     @Test
     public void updateFoodTruckName() throws Exception {
         VendorManager vendorManager = new VendorManager();

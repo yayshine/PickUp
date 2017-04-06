@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
 public class OrderManagerTest {
     private HashMap<String, Integer> foodQuantMap = new HashMap<>();
     private Order nOrder;
+
+    // test addOrder() with dummy FoodItem data and using getter from Order class
     @Test
     public void addOrder() throws Exception {
         foodQuantMap.put("-KgII-d38BmwAWPoh-RA",1);
@@ -22,6 +24,7 @@ public class OrderManagerTest {
         assert (nOrder.getID() != null);
     }
 
+    // test updateIsReady() using dummy FoodItem data and using addOrder() and getter from Order class
     @Test
     public void updateIsReady() throws Exception {
         foodQuantMap.put("-KgII-d38BmwAWPoh-RA",1);

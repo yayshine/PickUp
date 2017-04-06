@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
  * Created by Yanqing on 4/5/17.
  */
 public class CustomerManagerTest {
+    // test addCustomer function and getters of Customer class
     @Test
     public void addCustomer() throws Exception {
         CustomerManager tCustomerManager = new CustomerManager();
@@ -20,6 +21,7 @@ public class CustomerManagerTest {
         assert (tCustomer.getCustomerName().equals("tCustomer"));
     }
 
+    // test removeCustomer function after addCustomer() with raw firebase query
     @Test
     public void removeCustomer() throws Exception {
         CustomerManager tCustomerManager = new CustomerManager();
