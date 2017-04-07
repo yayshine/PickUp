@@ -1,7 +1,10 @@
 package com.mobile.pickup;
 
+import android.provider.ContactsContract;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.Model.Menu;
 import com.mobile.pickup.Model.Vendor;
@@ -31,6 +34,12 @@ public class MenuManagerTest {
         assert (tMenu.getID() != null);
         assert (tMenu.getVendorID().equals(tVendor.getID()));
         assert (tMenu.getFoodItemIDVisibilityMap().equals(tFoodItemIDList));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference menuRef = database.getReference("Menu");
+        DatabaseReference vendorRef = database.getReference("Vendor");
+        menuRef.child(tMenu.getID()).removeValue();
+        vendorRef.child(tVendor.getID()).removeValue();
     }
 
     // test updateVendorID() after using addVendor() and getters from Menu and Vendor class
@@ -46,6 +55,13 @@ public class MenuManagerTest {
 
         tMenuManager.updateVendorID(tMenu.getID(), tVendor1.getID());
         assert (tMenu.getVendorID().equals(tVendor1.getID()));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference menuRef = database.getReference("Menu");
+        DatabaseReference vendorRef = database.getReference("Vendor");
+        menuRef.child(tMenu.getID()).removeValue();
+        vendorRef.child(tVendor.getID()).removeValue();
+        vendorRef.child(tVendor1.getID()).removeValue();
     }
 
     // test addFoodItem() using all above methods and getters
@@ -53,7 +69,6 @@ public class MenuManagerTest {
     public void addFoodItem() throws Exception {
         VendorManager tVendorManager = new VendorManager();
         Vendor tVendor = tVendorManager.addVendor("tFoodTruck", null, "test hour", true);
-        Vendor tVendor1 = tVendorManager.addVendor("tFoodTruck1", null, "test hour", true);
         HashMap<String, Boolean> tFoodItemIDList = new HashMap<>();
         tFoodItemIDList.put(FoodItemManager.addFoodItem("tFoodItem", 2.3f, "tDesc").getID(), true);
         MenuManager tMenuManager = new MenuManager();
@@ -63,6 +78,14 @@ public class MenuManagerTest {
         tMenuManager.addFoodItem(tMenu.getID(), tFoodItem.getID());
         assert (tMenu.getFoodItemIDVisibilityMap().containsKey(tFoodItem.getID()) == true);
         assert (tMenu.getFoodItemIDVisibilityMap().get(tFoodItem.getID()) == true);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference menuRef = database.getReference("Menu");
+        DatabaseReference vendorRef = database.getReference("Vendor");
+        DatabaseReference foodItemRef = database.getReference("FoodItem");
+        menuRef.child(tMenu.getID()).removeValue();
+        vendorRef.child(tVendor.getID()).removeValue();
+        foodItemRef.child(tFoodItem.getID()).removeValue();
     }
 
     // testing deleteFoodItem() and activateFoodItem()
@@ -71,7 +94,6 @@ public class MenuManagerTest {
     public void activateAndDeleteFoodItem() throws Exception {
         VendorManager tVendorManager = new VendorManager();
         Vendor tVendor = tVendorManager.addVendor("tFoodTruck", null, "test hour", true);
-        Vendor tVendor1 = tVendorManager.addVendor("tFoodTruck1", null, "test hour", true);
         HashMap<String, Boolean> tFoodItemIDList = new HashMap<>();
         tFoodItemIDList.put(FoodItemManager.addFoodItem("tFoodItem", 2.3f, "tDesc").getID(), true);
         MenuManager tMenuManager = new MenuManager();
@@ -84,6 +106,12 @@ public class MenuManagerTest {
 
         tMenuManager.activateFoodItem(tMenu.getID(), tFoodItem.getID());
         assert (tMenu.getFoodItemIDVisibilityMap().get(tFoodItem.getID()) == true);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference menuRef = database.getReference("Menu");
+        DatabaseReference vendorRef = database.getReference("Vendor");
+        menuRef.child(tMenu.getID()).removeValue();
+        vendorRef.child(tVendor.getID()).removeValue();
     }
 
 }

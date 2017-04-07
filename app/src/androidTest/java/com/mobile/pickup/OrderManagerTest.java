@@ -2,6 +2,8 @@ package com.mobile.pickup;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mobile.pickup.Model.Order;
 
 import org.junit.Test;
@@ -26,6 +28,10 @@ public class OrderManagerTest {
         foodQuantMap.put("-KgII-d38BmwAWPoh-RA",1);
         nOrder = OrderManager.addOrder("Test Customer", "-Kfz4012r7qbR08higRA", foodQuantMap,5, 43555);
         assert (nOrder.getID() != null);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference orderRef = database.getReference("Order");
+        orderRef.child(nOrder.getID()).removeValue();
     }
 
     // test updateIsReady() using dummy FoodItem data and using addOrder() and getter from Order class
@@ -35,6 +41,10 @@ public class OrderManagerTest {
         nOrder = OrderManager.addOrder("Test Customer", "-Kfz4012r7qbR08higRA", foodQuantMap,5, 43555);
         OrderManager.updateIsReady(nOrder.getID(), true);
         assert (nOrder.getReady() == true);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference orderRef = database.getReference("Order");
+        orderRef.child(nOrder.getID()).removeValue();
     }
 
 }

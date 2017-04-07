@@ -2,6 +2,8 @@ package com.mobile.pickup;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mobile.pickup.Model.Vendor;
 
 import org.junit.Test;
@@ -21,6 +23,10 @@ public class VendorManagerTest {
         VendorManager vendorManager = new VendorManager();
         testVendor = vendorManager.addVendor("Test Truck", "-Kg1ftYLPH-D9m4hZcoy", "10:00AM - 6:00PM", true);
         assert (testVendor.getID() != null);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference vendorRef = database.getReference("Vendor");
+        vendorRef.child(testVendor.getID()).removeValue();
     }
 
     // test updateFoodTruckName() using dummy menu data, addVendor() and getter from Vendor class
@@ -30,6 +36,10 @@ public class VendorManagerTest {
         testVendor = vendorManager.addVendor("Test Truck", "-Kg1ftYLPH-D9m4hZcoy", "10:00AM - 6:00PM", true);
         vendorManager.updateFoodTruckName(testVendor.getID(), "Changed Food Truck Name");
         assert (testVendor.getFoodTruckName().equals("Changed Food Truck Name"));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference vendorRef = database.getReference("Vendor");
+        vendorRef.child(testVendor.getID()).removeValue();
     }
 
 }

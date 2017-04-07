@@ -2,6 +2,8 @@ package com.mobile.pickup;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mobile.pickup.Model.FoodItem;
 
 import org.junit.Test;
@@ -22,6 +24,10 @@ public class FoodItemManagerTest {
         assert (tFoodItem.getName().equals("testFood"));
         assert (tFoodItem.getPrice() == 2.3f);
         assert (tFoodItem.getDesc().equals("test desc"));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference foodItemRef = database.getReference("FoodItem");
+        foodItemRef.child(tFoodItem.getID()).removeValue();
     }
 
     // test updateFoodItem() after using addFoodItem() and getters
@@ -32,6 +38,10 @@ public class FoodItemManagerTest {
         assert (tFoodItem.getName().equals("updatedFoodName"));
         assert (tFoodItem.getPrice() == 2.4f);
         assert (tFoodItem.getDesc().equals("updated desc"));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference foodItemRef = database.getReference("FoodItem");
+        foodItemRef.child(tFoodItem.getID()).removeValue();
     }
 
 }

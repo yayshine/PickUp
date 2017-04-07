@@ -23,6 +23,10 @@ public class CustomerManagerTest {
         Customer tCustomer = tCustomerManager.addCustomer("tCustomer");
         assert (tCustomer.getID() != null);
         assert (tCustomer.getCustomerName().equals("tCustomer"));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference customerRef = database.getReference("Customer");
+        customerRef.child(tCustomer.getID()).removeValue();
     }
 
     // test removeCustomer function after addCustomer() with raw firebase query
