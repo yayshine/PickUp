@@ -7,6 +7,7 @@ import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.CustomerManager;
 import com.mobile.pickup.Model.Customer;
 import com.mobile.pickup.Model.CustomerSide.TempOrder;
+import com.mobile.pickup.Model.FoodItem;
 import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.PropertyManager;
@@ -29,6 +30,7 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ReviewFragmentInstrumentationTest {
     private Vendor mVendor;
+    private final String foodItemID = "-KgII-d38BmwAWPoh-RA";
 
     @Rule
     public ActivityTestRule mActivityRule = new ActivityTestRule<>(
@@ -69,6 +71,22 @@ public class ReviewFragmentInstrumentationTest {
     }
 
     public void generateOrderWithSelection(){
+        ((OrderActivity)mActivityRule.getActivity()).mFragmentManager.beginTransaction()
+                .replace(R.id.container, new ReviewFragment())
+                .addToBackStack(OrderActivity.TAG_MENU)
+                .commit();
 
+        TempOrder tempOrder = new TempOrder();
+        tempOrder.setVendor(mVendor);
+        FoodItem foodItem = new FoodItem(foodItemID, "Shredded Pork with Garlic Sauce", 5, "This dish contains shredded pork and vegatables, cooked with garlic sauce.");
+        tempOrder.getFoodItemQuantMap().put(foodItem, 5);
+        OrderActivity.mTempOrder = tempOrder;
+
+        onView(withId(R.id.btn_pay)).perform(click());
+        Order order = OrderActivity.mOrder;
+        assert(order.getID() != null);
+        assertEquals(order.getCustomerID(), PropertyManager.getInstance().getID());
+        assertEquals(order.getVendorID(), mVendor.getID());
+        assert(order.getFoodItemIDQuantMap().get(foodItemID) == 5);
     }
 }
