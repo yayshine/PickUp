@@ -66,7 +66,7 @@ public class ReviewFragment extends Fragment {
                 long currentTime = System.currentTimeMillis();
                 int waitingTime = 20;
 
-                OrderManager.addOrder(customerId, vendor.getID(), foodItemIDQuantMap, waitingTime, currentTime); // waiting time dummy data for now
+                OrderActivity.mOrder = OrderManager.addOrder(customerId, vendor.getID(), foodItemIDQuantMap, waitingTime, currentTime); // waiting time dummy data for now
 
                 // navigate to VendorListFragment and reset TempOrder
                 ((OrderActivity) getActivity()).mFragmentManager.popBackStack(OrderActivity.TAG_VENDOR_LIST, FragmentManager.POP_BACK_STACK_INCLUSIVE);
