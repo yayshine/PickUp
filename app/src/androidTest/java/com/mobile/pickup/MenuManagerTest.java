@@ -70,12 +70,13 @@ public class MenuManagerTest {
         VendorManager tVendorManager = new VendorManager();
         Vendor tVendor = tVendorManager.addVendor("tFoodTruck", null, "test hour", true);
         HashMap<String, Boolean> tFoodItemIDList = new HashMap<>();
-        tFoodItemIDList.put(FoodItemManager.addFoodItem("tFoodItem", 2.3f, "tDesc").getID(), true);
+        FoodItem tFoodItem1 = FoodItemManager.addFoodItem("tFoodItem", 2.3f, "tDesc");
+        tFoodItemIDList.put(tFoodItem1.getID(), true);
         MenuManager tMenuManager = new MenuManager();
         Menu tMenu = tMenuManager.addMenu(tVendor.getID(), tFoodItemIDList);
         FoodItem tFoodItem = FoodItemManager.addFoodItem("tFoodItem1", 2.4f, "tDesc1");
-
         tMenuManager.addFoodItem(tMenu.getID(), tFoodItem.getID());
+
         assert (tMenu.getFoodItemIDVisibilityMap().containsKey(tFoodItem.getID()) == true);
         assert (tMenu.getFoodItemIDVisibilityMap().get(tFoodItem.getID()) == true);
 
@@ -86,6 +87,7 @@ public class MenuManagerTest {
         menuRef.child(tMenu.getID()).removeValue();
         vendorRef.child(tVendor.getID()).removeValue();
         foodItemRef.child(tFoodItem.getID()).removeValue();
+        foodItemRef.child(tFoodItem1.getID()).removeValue();
     }
 
     // testing deleteFoodItem() and activateFoodItem()
@@ -95,7 +97,8 @@ public class MenuManagerTest {
         VendorManager tVendorManager = new VendorManager();
         Vendor tVendor = tVendorManager.addVendor("tFoodTruck", null, "test hour", true);
         HashMap<String, Boolean> tFoodItemIDList = new HashMap<>();
-        tFoodItemIDList.put(FoodItemManager.addFoodItem("tFoodItem", 2.3f, "tDesc").getID(), true);
+        FoodItem tFoodItem1 = FoodItemManager.addFoodItem("tFoodItem", 2.3f, "tDesc");
+        tFoodItemIDList.put(tFoodItem1.getID(), true);
         MenuManager tMenuManager = new MenuManager();
         Menu tMenu = tMenuManager.addMenu(tVendor.getID(), tFoodItemIDList);
         FoodItem tFoodItem = FoodItemManager.addFoodItem("tFoodItem1", 2.4f, "tDesc1");
@@ -107,11 +110,18 @@ public class MenuManagerTest {
         tMenuManager.activateFoodItem(tMenu.getID(), tFoodItem.getID());
         assert (tMenu.getFoodItemIDVisibilityMap().get(tFoodItem.getID()) == true);
 
+        tMenuManager.deleteFoodItem(tMenu.getID(), tFoodItem.getID());
+        assert (tMenu.getFoodItemIDVisibilityMap().get(tFoodItem.getID()) == false);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference menuRef = database.getReference("Menu");
         DatabaseReference vendorRef = database.getReference("Vendor");
+        DatabaseReference foodItemRef = database.getReference("FoodItem");
         menuRef.child(tMenu.getID()).removeValue();
         vendorRef.child(tVendor.getID()).removeValue();
+        foodItemRef.child(tFoodItem.getID()).removeValue();
+        foodItemRef.child(tFoodItem1.getID()).removeValue();
+
     }
 
 }
