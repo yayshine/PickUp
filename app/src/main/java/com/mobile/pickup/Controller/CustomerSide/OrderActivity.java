@@ -8,6 +8,7 @@ import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 
 import com.mobile.pickup.Model.CustomerSide.TempOrder;
 
+import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.R;
 
 public class OrderActivity extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class OrderActivity extends AppCompatActivity {
 
     public FragmentManager mFragmentManager;
     public static TempOrder mTempOrder;
+    public static Order mOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

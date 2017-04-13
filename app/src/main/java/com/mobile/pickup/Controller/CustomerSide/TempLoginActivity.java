@@ -28,10 +28,9 @@ public class TempLoginActivity extends AppCompatActivity {
                 String username = edit_username.getText().toString();
 
                 Customer customer = CustomerManager.addCustomer(username);
-                Customer tempCustomer = new Customer(customer.getID(), username);
                 PropertyManager propertyManager = PropertyManager.getInstance();
-                propertyManager.setUsername(tempCustomer.getCustomerName());
-                propertyManager.setID(tempCustomer.getID());
+                propertyManager.setUsername(customer.getCustomerName());
+                propertyManager.setID(customer.getID());
 
                 Intent intent = new Intent(TempLoginActivity.this, OrderActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
