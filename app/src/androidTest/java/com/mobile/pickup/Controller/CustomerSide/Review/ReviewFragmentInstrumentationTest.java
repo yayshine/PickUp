@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 /**
@@ -55,7 +54,6 @@ public class ReviewFragmentInstrumentationTest {
     public void generateOrderWithoutSelection(){
         ((OrderActivity)mActivityRule.getActivity()).mFragmentManager.beginTransaction()
                 .replace(R.id.container, new ReviewFragment())
-                .addToBackStack(OrderActivity.TAG_MENU)
                 .commit();
 
         TempOrder tempOrder = new TempOrder();
@@ -73,7 +71,6 @@ public class ReviewFragmentInstrumentationTest {
     public void generateOrderWithSelection(){
         ((OrderActivity)mActivityRule.getActivity()).mFragmentManager.beginTransaction()
                 .replace(R.id.container, new ReviewFragment())
-                .addToBackStack(OrderActivity.TAG_MENU)
                 .commit();
 
         TempOrder tempOrder = new TempOrder();
