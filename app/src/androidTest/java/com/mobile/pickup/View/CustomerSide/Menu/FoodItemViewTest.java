@@ -23,6 +23,7 @@ import java.util.List;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.internal.util.Checks.checkNotNull;
 import static org.hamcrest.EasyMock2Matchers.equalTo;
@@ -67,6 +68,7 @@ public class FoodItemViewTest {
                 .perform(click());
 
         onData(anything())
+                .inRoot(isPlatformPopup())
                 .atPosition(0)
                 .perform(click());
 
@@ -93,6 +95,7 @@ public class FoodItemViewTest {
         int quantity = 5;
 
         onData(anything())
+                .inRoot(isPlatformPopup())
                 .atPosition(quantity)
                 .perform(click());
 
