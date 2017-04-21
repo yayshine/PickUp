@@ -1,31 +1,21 @@
 package com.mobile.pickup.Controller.CustomerSide;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
-import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 import com.mobile.pickup.CustomerManager;
 import com.mobile.pickup.Model.Customer;
 import com.mobile.pickup.PropertyManager;
@@ -33,7 +23,7 @@ import com.mobile.pickup.R;
 
 public class TempLoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public ProgressDialog mProgressDialog;  // from BaseActivity
+    public ProgressDialog mProgressDialog;  // from BaseActivity tutorial code
 
     private static final String TAG = "EmailPassword";
 
@@ -42,13 +32,8 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
     private EditText mEmailField;
     private EditText mPasswordField;
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
-
-    // [START declare_auth_listener]
     private FirebaseAuth.AuthStateListener mAuthListener;
-    // [END declare_auth_listener]
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +58,7 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
 //                startActivity(intent);
 //            }
 //        });
+
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
         mDetailTextView = (TextView) findViewById(R.id.detail);
@@ -85,11 +71,10 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.verify_email_button).setOnClickListener(this);
 
-        // [START initialize_auth]
+        // [initialize_auth]
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
-        // [START auth_state_listener]
+        // [auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -101,16 +86,13 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // [START_EXCLUDE]
+                // [EXCLUDE]
                 updateUI(user);
-                // [END_EXCLUDE]
             }
         };
-        // [END auth_state_listener]
     }
 
-
-    // from BaseActivity
+    // from BaseActivity of tutorial code
     public void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -127,15 +109,14 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    // [START on_start_add_listener]
+    // [on_start_add_listener]
     @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
-    // [END on_start_add_listener]
 
-    // [START on_stop_remove_listener]
+    // [on_stop_remove_listener]
     @Override
     public void onStop() {
         super.onStop();
@@ -144,7 +125,6 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-    // [END on_stop_remove_listener]
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
@@ -154,7 +134,7 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
 
         showProgressDialog();
 
-        // [START create_user_with_email]
+        // [create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -169,12 +149,10 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // [START_EXCLUDE]
+                        // [EXCLUDE]
                         hideProgressDialog();
-                        // [END_EXCLUDE]
                     }
                 });
-        // [END create_user_with_email]
     }
 
     private void signIn(String email, String password) {
@@ -185,7 +163,7 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
 
         showProgressDialog();
 
-        // [START sign_in_with_email]
+        // [sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -201,55 +179,18 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // [START_EXCLUDE]
+                        // [EXCLUDE]
                         if (!task.isSuccessful()) {
                             mStatusTextView.setText(R.string.auth_failed);
                         }
                         hideProgressDialog();
-
-                        Intent intent = new Intent(TempLoginActivity.this, OrderActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        // [END_EXCLUDE]
                     }
                 });
-        // [END sign_in_with_email]
     }
 
     private void signOut() {
         mAuth.signOut();
         updateUI(null);
-    }
-
-    private void sendEmailVerification() {
-        // Disable button
-        findViewById(R.id.verify_email_button).setEnabled(false);
-
-        // Send verification email
-        // [START send_email_verification]
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // [START_EXCLUDE]
-                        // Re-enable button
-                        findViewById(R.id.verify_email_button).setEnabled(true);
-
-                        if (task.isSuccessful()) {
-                            Toast.makeText(TempLoginActivity.this,
-                                    "Verification email sent to " + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(TempLoginActivity.this,
-                                    "Failed to send verification email.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END send_email_verification]
     }
 
     private boolean validateForm() {
@@ -285,6 +226,15 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
             findViewById(R.id.signed_in_buttons).setVisibility(View.VISIBLE);
 
             findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
+            Customer customer = CustomerManager.setCustomer(user.getUid(), user.getEmail());
+            PropertyManager propertyManager = PropertyManager.getInstance();
+            propertyManager.setUsername(customer.getCustomerName());
+            propertyManager.setID(customer.getID());
+
+//            Intent intent = new Intent(TempLoginActivity.this, OrderActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
@@ -304,9 +254,6 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } else if (i == R.id.sign_out_button) {
             signOut();
-        } else if (i == R.id.verify_email_button) {
-            sendEmailVerification();
         }
     }
-
 }
