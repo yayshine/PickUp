@@ -9,8 +9,6 @@ import com.mobile.pickup.Model.Customer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Yanqing on 4/5/17.
  */

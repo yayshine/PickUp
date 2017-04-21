@@ -6,26 +6,21 @@ import android.support.test.runner.AndroidJUnit4;
 import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Model.FoodItem;
-import com.mobile.pickup.Model.Menu;
 import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.R;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.List;
-
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.internal.util.Checks.checkNotNull;
-import static org.hamcrest.EasyMock2Matchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
 
 import static org.hamcrest.Matchers.anything;
@@ -67,6 +62,7 @@ public class FoodItemViewTest {
                 .perform(click());
 
         onData(anything())
+                .inRoot(isPlatformPopup())
                 .atPosition(0)
                 .perform(click());
 
@@ -93,6 +89,7 @@ public class FoodItemViewTest {
         int quantity = 5;
 
         onData(anything())
+                .inRoot(isPlatformPopup())
                 .atPosition(quantity)
                 .perform(click());
 
