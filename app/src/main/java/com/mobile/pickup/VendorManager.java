@@ -21,11 +21,39 @@ public final class VendorManager {
     private static final String TAG = "VendorManager";
     private OnVendorReadListener mListener;
 
-    public Vendor addVendor(String foodTruckName, String menuID, String operatingHours, boolean isOpen){
+    public Vendor addVendor(String foodTruckName, String menuID, String operatingHours, boolean isOpen) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference vendorRef = database.getReference("Vendor");
 
         String vendorID = vendorRef.push().getKey();
+        Vendor nVendor = new Vendor(vendorID, foodTruckName, menuID, operatingHours, isOpen);
+        vendorRef.child(vendorID).setValue(nVendor);
+
+        return nVendor;
+    }
+
+    public Vendor getVendor(String vendorID) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference vendorRef = database.getReference("Vendor");
+
+        if (vendorRef.child(vendorID).equals(null)) {
+            return null;
+        }
+        else {
+            String foodTruckName = vendorRef.child(vendorID).child("foodTruckName").toString();
+            String menuID = vendorRef.child(vendorID).child("menuID").toString();
+            String operatingHours = vendorRef.child(vendorID).child("operatingHours").toString();
+            boolean isOpen = vendorRef.child(vendorID).child("open").toString().equals("true");
+            Vendor nVendor = new Vendor(vendorID, foodTruckName, menuID, operatingHours, isOpen);
+
+            return nVendor;
+        }
+    }
+
+    public Vendor setVendor(String vendorID, String foodTruckName, String menuID, String operatingHours, boolean isOpen){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference vendorRef = database.getReference("Vendor");
+
         Vendor nVendor = new Vendor(vendorID, foodTruckName, menuID, operatingHours, isOpen);
         vendorRef.child(vendorID).setValue(nVendor);
 
