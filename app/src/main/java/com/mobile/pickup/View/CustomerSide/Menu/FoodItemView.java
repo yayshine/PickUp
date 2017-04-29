@@ -37,6 +37,12 @@ public class FoodItemView extends FrameLayout {
         Integer[] quants = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
         ArrayAdapter<Integer> quantAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, quants);
         spinner_quantity.setAdapter(quantAdapter);
+
+        // selects previous selection
+        if(OrderActivity.mTempOrder.getFoodItemQuantMap().containsKey(foodItem)){
+            spinner_quantity.setSelection(OrderActivity.mTempOrder.getFoodItemQuantMap().get(foodItem));
+        }
+
         spinner_quantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
