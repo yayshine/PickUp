@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -100,6 +101,11 @@ public class OrderListActivity extends AppCompatActivity
             //get CustomerOrder from ArrayLIst according to position
             OrderListItem currentOrder = orders.get(position);
             ImageButton doneButton = (ImageButton) itemView.findViewById(R.id.done_button);
+
+            /*
+                set the currentOrder to be swipe-able
+            */
+
 
             //load current Order object's image into ImageButton; set listener
 
