@@ -1,9 +1,11 @@
 package com.mobile.pickup.Controller.VendorSide;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -19,7 +21,7 @@ import com.mobile.pickup.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderListActivity extends AppCompatActivity
+public class OrderListActivity extends Activity
 {
 
     private List<OrderListItem> orders = new ArrayList<OrderListItem>();
@@ -31,6 +33,7 @@ public class OrderListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_v_order_list);
 
         vendorID = "-Kfz4012r7qbR08higRA";

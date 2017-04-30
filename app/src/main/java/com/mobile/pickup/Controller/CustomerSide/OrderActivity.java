@@ -3,6 +3,7 @@ package com.mobile.pickup.Controller.CustomerSide;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 
@@ -20,6 +21,7 @@ public class OrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_c_order);
 
         mTempOrder = new TempOrder();

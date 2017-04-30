@@ -1,9 +1,11 @@
 package com.mobile.pickup.Controller.CustomerSide;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -12,11 +14,12 @@ import com.mobile.pickup.Model.Customer;
 import com.mobile.pickup.PropertyManager;
 import com.mobile.pickup.R;
 
-public class TempLoginActivity extends AppCompatActivity {
+public class TempLoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_c_temp_login);
 
         final EditText edit_username = (EditText)findViewById(R.id.edit_username);
