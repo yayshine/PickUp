@@ -48,21 +48,30 @@ public class OrderListActivity extends Activity
     {
         adapter1 = new MyListAdapter();          //create array adaptor
         ListView orderList = (ListView) findViewById(R.id.order_list_view);  //create the list object
-
-        VendorSwipeDetector detector = new VendorSwipeDetector();
-        orderList.setOnTouchListener(detector);
-
-        if (detector.getAction() == VendorSwipeDetector.Action.LR ||
-                detector.getAction() == VendorSwipeDetector.Action.RL ||
-            detector.getAction() == VendorSwipeDetector.Action.TB ||
-                    detector.getAction() == VendorSwipeDetector.Action.BT)
-        {
-            Toast.makeText(OrderListActivity.this, "touch detected",Toast.LENGTH_LONG).show();
-        }
-
-
-
         orderList.setAdapter(adapter1);                                      //use List object to set
+
+        SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener
+                (orderList, new SwipeDismissListViewTouchListener.DismissCallbacks()
+                {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions)
+                                {
+                                    orders.remove(position);
+                                    adapter1.notifyDataSetChanged();
+                                }
+                            }
+                });
+        orderList.setOnTouchListener(touchListener);
+
+
+
+
     }
 
 
