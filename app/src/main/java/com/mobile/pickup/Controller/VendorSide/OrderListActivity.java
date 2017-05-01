@@ -47,6 +47,20 @@ public class OrderListActivity extends Activity
     {
         adapter1 = new MyListAdapter();          //create array adaptor
         ListView orderList = (ListView) findViewById(R.id.order_list_view);  //create the list object
+
+        VendorSwipeDetector detector = new VendorSwipeDetector();
+        orderList.setOnTouchListener(detector);
+
+        if (detector.getAction() == VendorSwipeDetector.Action.LR ||
+                detector.getAction() == VendorSwipeDetector.Action.RL ||
+            detector.getAction() == VendorSwipeDetector.Action.TB ||
+                    detector.getAction() == VendorSwipeDetector.Action.BT)
+        {
+            Toast.makeText(OrderListActivity.this, "touch detected",Toast.LENGTH_LONG).show();
+        }
+
+
+
         orderList.setAdapter(adapter1);                                      //use List object to set
     }
 
@@ -94,16 +108,18 @@ public class OrderListActivity extends Activity
         public View getView(int position, View convertView, ViewGroup parent)
         {
             View itemView = convertView;
+
             if (itemView==null)     //if no view, make one using order_object_view
             {
                 //if no order View, then "inflate" layout; create layout for us
                 //working on the parent view
                 //do not attach to root -- false
                 itemView = getLayoutInflater().inflate(R.layout.view_order_list_item, parent, false);
+
             }
             //get CustomerOrder from ArrayLIst according to position
             OrderListItem currentOrder = orders.get(position);
-            ImageButton doneButton = (ImageButton) itemView.findViewById(R.id.done_button);
+
 
             /*
                 set the currentOrder to be swipe-able
@@ -112,6 +128,7 @@ public class OrderListActivity extends Activity
 
             //load current Order object's image into ImageButton; set listener
 
+            ImageButton doneButton = (ImageButton) itemView.findViewById(R.id.done_button);
             doneButton.setImageResource(R.drawable.done_button);
             MyOnClickListener listener = new MyOnClickListener(position);
             doneButton.setOnClickListener(listener);

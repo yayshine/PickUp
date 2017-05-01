@@ -1,6 +1,5 @@
 package com.mobile.pickup.Controller.CustomerSide.VendorList;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,7 +8,6 @@ import com.mobile.pickup.Model.Vendor;
 
 import com.mobile.pickup.View.CustomerSide.VendorList.VendorListItemView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

@@ -7,13 +7,10 @@ import android.widget.BaseAdapter;
 import com.mobile.pickup.Model.CustomerSide.Menu.MenuHeader;
 import com.mobile.pickup.Model.FoodItem;
 
-import com.mobile.pickup.Model.Vendor;
 import com.mobile.pickup.View.CustomerSide.Menu.FoodItemView;
 import com.mobile.pickup.View.CustomerSide.Menu.MenuHeaderView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**

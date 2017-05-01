@@ -1,6 +1,5 @@
 package com.mobile.pickup;
 
-import android.provider.ContactsContract;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.google.firebase.database.DatabaseReference;
@@ -13,8 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.HashMap;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Yanqing on 4/5/17.
