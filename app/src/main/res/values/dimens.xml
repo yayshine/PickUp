@@ -3,4 +3,12 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="list_padding_top">8dp</dimen>
+    <dimen name="list_label_margin_side">12dp</dimen>
+    <dimen name="list_margin_side">6dp</dimen>
+    <dimen name="list_padding_side">6dp</dimen>
+    <dimen name="list_padding_bottom">14dp</dimen>
+    <dimen name="vendor_list_wait_time_width">60dp</dimen>
+    <dimen name="text_margin">2dp</dimen>
+    <dimen name="divider">0.8dp</dimen>
 </resources>

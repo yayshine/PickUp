@@ -8,6 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingTop="@dimen/list_padding_top"
+        android:layout_marginLeft="@dimen/list_label_margin_side"
+        android:layout_marginRight="@dimen/list_label_margin_side"
+        android:paddingBottom="@dimen/list_padding_bottom"
         android:id="@+id/vendor_list_label">
 
         <TextView
@@ -15,21 +19,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/colorAccent"
-            android:text="name" />
+            android:textAppearance="@style/font_label"
+            android:text="Vendor" />
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:text="wait time" />
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/font_label"
+            android:text="Waiting Time" />
         />
 
     </LinearLayout>
 
-    <ListView
+    <View style="@style/divider"
+        android:id="@+id/divider"
         android:layout_below="@id/vendor_list_label"
+        android:layout_marginLeft="@dimen/list_margin_side"
+        android:layout_marginRight="@dimen/list_margin_side"/>
+
+    <ListView
+        android:layout_below="@id/divider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/list_margin_side"
+        android:layout_marginRight="@dimen/list_margin_side"
+        android:divider="@color/colorGrey"
+        android:dividerHeight="@dimen/divider"
         android:id="@+id/list_vendor"/>
 </RelativeLayout>
