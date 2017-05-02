@@ -16,8 +16,7 @@ import com.mobile.pickup.Model.CustomerSide.TempOrder;
 import com.mobile.pickup.Model.Order;
 import com.mobile.pickup.R;
 
-public class OrderActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener{
+public class OrderActivity extends AppCompatActivity {
 
     NavigationView naviView;
 
@@ -40,8 +39,8 @@ public class OrderActivity extends AppCompatActivity implements
                 .replace(R.id.container, new VendorListFragment())
                 .commit();
 
-        naviView = (NavigationView)findViewById(R.id.navi);
-        naviView.setNavigationItemSelectedListener(this);
+//        naviView = (NavigationView)findViewById(R.id.navi);
+//        naviView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -55,20 +54,20 @@ public class OrderActivity extends AppCompatActivity implements
         super.onBackPressed();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        switch(menuItem.getItemId()) {
-            case R.id.menu_item1 :
-            case R.id.menu_item2 :
-            case R.id.menu_item3 :
-                menuItem.setChecked(true);
-                Toast.makeText(this, "Check Item Select : " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.menu_sub1 :
-            case R.id.menu_sub2 :
-                Toast.makeText(this, "Sub Item Click : " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//        switch(menuItem.getItemId()) {
+//            case R.id.menu_item1 :
+//            case R.id.menu_item2 :
+//            case R.id.menu_item3 :
+//                menuItem.setChecked(true);
+//                Toast.makeText(this, "Check Item Select : " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+//                return true;
+//            case R.id.menu_sub1 :
+//            case R.id.menu_sub2 :
+//                Toast.makeText(this, "Sub Item Click : " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+//                return true;
+//        }
+//        return false;
+//    }
 }

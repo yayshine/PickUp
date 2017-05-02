@@ -12,20 +12,24 @@
 
     <Button
         android:id="@+id/btn_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/list_padding_bottom"
+        android:background="@color/colorPrimaryDark"
+        android:textAppearance="@style/font_button"
         android:text="Customer" />
 
     <Button
         android:id="@+id/btn_vendor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@+id/btn_customer"
+        android:background="@color/colorPrimaryDark"
+        android:textAppearance="@style/font_button"
         android:text="Vendor" />
 
 </RelativeLayout>
