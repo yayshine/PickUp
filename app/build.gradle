@@ -25,8 +25,8 @@ android {
         }
     }
 
-    buildTypes.each{
-        it.buildConfigField 'String','UNIQUE_FIREBASE_ROOT_URL', UniqueFirebaseRootUrl
+    buildTypes.each {
+        it.buildConfigField 'String', 'UNIQUE_FIREBASE_ROOT_URL', UniqueFirebaseRootUrl
     }
 
     packagingOptions {
@@ -38,6 +38,7 @@ android {
     lintOptions {
         abortOnError false
     }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/values/menu'] } }
 }
 
 dependencies {
