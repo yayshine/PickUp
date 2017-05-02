@@ -21,6 +21,16 @@ public class CustomerManager {
         return nCustomer;
     }
 
+    public static Customer setCustomer(String customerID, String customerName){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference customerRef = database.getReference("Customer");
+
+        Customer nCustomer = new Customer(customerID,customerName);
+        customerRef.child(customerID).setValue(nCustomer);
+
+        return nCustomer;
+    }
+
     public static void removeCustomer(String customerID){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference customerRef = database.getReference("Customer");
