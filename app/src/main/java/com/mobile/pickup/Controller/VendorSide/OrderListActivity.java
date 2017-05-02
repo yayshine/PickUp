@@ -145,7 +145,7 @@ public class OrderListActivity extends Activity
             */
 
             //sets crder# and customer name
-            String orderTitle = "Order#"+(int)(position+1) + ": " + orders.get(position).getCustomerName();
+            String orderTitle = "Order#"+(int)(position+1) + ":\n" + orders.get(position).getCustomerName();
             TextView customerName = (TextView) itemView.findViewById(R.id.customer_name);
             customerName.setText(orderTitle);
 

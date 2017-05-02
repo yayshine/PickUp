@@ -24,24 +24,28 @@
         android:id="@+id/customer_name"
         android:text="customer name d w w w w w w w w w"
         android:textSize="18sp"
-        android:maxWidth="190dp"
-        android:textStyle="bold"
+        android:maxWidth="290dp"
+        android:textStyle="italic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="4sp"
         android:paddingBottom="4sp"
-        android:maxLines="2"/>
+        android:maxLines="3"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/food_list"
         android:text="food list WW w w w w  w w w"
         android:textSize="16sp"
         android:fontFamily="sans-serif=light"
-        android:maxWidth="270dp"
-        android:paddingBottom="8dp"
+        android:maxWidth="290dp"
+        android:paddingBottom="-4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/customer_name"
-        />
+        android:layout_alignEnd="@+id/customer_name"
+        android:layout_alignParentStart="true" />
 
     <!-- Paid status commented out, b/c all orders are paid
     <TextView

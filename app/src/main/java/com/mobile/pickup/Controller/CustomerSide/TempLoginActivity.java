@@ -1,8 +1,6 @@
 package com.mobile.pickup.Controller.CustomerSide;
 
-
 import android.app.ProgressDialog;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +23,7 @@ import com.mobile.pickup.Model.Customer;
 import com.mobile.pickup.PropertyManager;
 import com.mobile.pickup.R;
 
-
-public class TempLoginActivity extends SignInSignUpActivity implements View.OnClickListener
-{
+public class TempLoginActivity extends SignInSignUpActivity implements View.OnClickListener{
 
     @Override
     public void updateUI(FirebaseUser user) {

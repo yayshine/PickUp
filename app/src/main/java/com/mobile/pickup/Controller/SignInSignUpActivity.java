@@ -128,7 +128,15 @@ public class SignInSignUpActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void createAccount(String email, String password) {
+    private void createAccount(String email, String password)
+    {
+        if (!email.contains("@"))
+        {
+            String emailError = "Let's not be sneaky. Enter a valid email.";
+            Toast.makeText(SignInSignUpActivity.this, emailError,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
@@ -157,7 +165,8 @@ public class SignInSignUpActivity extends AppCompatActivity implements View.OnCl
                 });
     }
 
-    private void signIn(String email, String password) {
+    private void signIn(String email, String password)
+    {
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
@@ -195,10 +204,12 @@ public class SignInSignUpActivity extends AppCompatActivity implements View.OnCl
         updateUI(null);
     }
 
+    //returns false if invalid email is entered
     private boolean validateForm() {
         boolean valid = true;
 
         String email = mEmailField.getText().toString();
+
         if (TextUtils.isEmpty(email)) {
             mEmailField.setError("Required.");
             valid = false;
