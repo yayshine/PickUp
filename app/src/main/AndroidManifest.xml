@@ -16,18 +16,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Controller.CustomerSide.OrderActivity"></activity>
+        <activity android:name=".Controller.CustomerSide.OrderActivity" />
         <activity android:name=".Controller.VendorSide.OrderListActivity" />
         <activity android:name=".Controller.CustomerSide.ConfirmActivity" />
         <activity android:name=".Controller.TempMainActivity">
+        </activity>
+        <activity android:name=".Controller.CustomerSide.TempLoginActivity" />
+        <activity android:name=".Controller.VendorSide.MainActivity" />
+        <activity android:name=".Controller.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controller.CustomerSide.TempLoginActivity" />
-        <activity android:name=".Controller.VendorSide.MainActivity"></activity>
     </application>
 
 </manifest>
