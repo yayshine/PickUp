@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Orders to Complete"
-         />
+        />
 
     <ListView
         android:id="@+id/order_list_view"
@@ -23,5 +23,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/ordersView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:divider="@color/colorAccent"
+        android:dividerHeight="4sp"
+        >
+    </ListView>
 </RelativeLayout>

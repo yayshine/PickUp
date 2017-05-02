@@ -147,6 +147,13 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
     // [END on_stop_remove_listener]
 
     private void createAccount(String email, String password) {
+        if (!email.contains("@"))
+            {
+                String emailError = "Let's not be sneaky. Enter a valid email.";
+                Toast.makeText(TempLoginActivity.this, emailError,
+                        Toast.LENGTH_SHORT).show();
+                   return;
+            }
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
