@@ -291,9 +291,9 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
             propertyManager.setUsername(customer.getCustomerName());
             propertyManager.setID(customer.getID());
 
-            Intent intent = new Intent(TempLoginActivity.this, OrderActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+//            Intent intent = new Intent(TempLoginActivity.this, OrderActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
             
         } else {
             mStatusTextView.setText(R.string.signed_out);
