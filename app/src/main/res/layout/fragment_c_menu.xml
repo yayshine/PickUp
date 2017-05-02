@@ -61,6 +61,8 @@
         android:layout_marginRight="@dimen/list_margin_side"
         android:divider="@color/colorGrey"
         android:dividerHeight="@dimen/divider"
+        android:footerDividersEnabled="false"
+        android:overScrollFooter="@android:color/transparent"
         android:id="@+id/list_menu"/>
 
 </RelativeLayout>

@@ -22,4 +22,14 @@
     <style name="font_button" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/colorWhite</item>
     </style>
+
+    <style name="font_confirm_label" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="font_confirm_text" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

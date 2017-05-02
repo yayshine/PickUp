@@ -11,4 +11,5 @@
     <dimen name="vendor_list_wait_time_width">60dp</dimen>
     <dimen name="text_margin">2dp</dimen>
     <dimen name="divider">0.8dp</dimen>
+    <dimen name="list_confirm_padding_top">60dp</dimen>
 </resources>
