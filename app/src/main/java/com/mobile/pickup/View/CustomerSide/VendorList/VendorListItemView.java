@@ -26,6 +26,6 @@ public class VendorListItemView extends FrameLayout {
 
     public void setData(Vendor vendor){
         text_name.setText(vendor.getFoodTruckName());
-        text_wait_time.setText("20 mins"); // dummy wait time for now
+        text_wait_time.setText("20 min"); // dummy wait time for now
     }
 }

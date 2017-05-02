@@ -1,9 +1,11 @@
 package com.mobile.pickup.Controller.CustomerSide;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.VendorList.VendorListFragment;
 
 import com.mobile.pickup.Model.CustomerSide.TempOrder;
@@ -32,4 +34,14 @@ public class OrderActivity extends AppCompatActivity {
                 .commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        Fragment current = mFragmentManager.findFragmentById(R.id.container);
+
+        // clears temp order information if exited out of vendor's menu
+        if(current instanceof MenuFragment){
+            mTempOrder = new TempOrder();
+        }
+        super.onBackPressed();
+    }
 }

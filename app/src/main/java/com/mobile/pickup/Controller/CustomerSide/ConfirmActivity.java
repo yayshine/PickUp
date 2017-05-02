@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.mobile.pickup.Controller.CustomerSide.Confirm.ConfirmFragment;
 import com.mobile.pickup.R;
@@ -37,7 +38,7 @@ public class ConfirmActivity extends AppCompatActivity {
                 .replace(R.id.container, fragment)
                 .commit();
 
-        Button btn_exit = (Button)findViewById(R.id.btn_exit);
+        TextView btn_exit = (TextView)findViewById(R.id.btn_exit);
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -51,23 +51,6 @@ public class ReviewFragmentInstrumentationTest {
     }
 
     @Test
-    public void generateOrderWithoutSelection(){
-        ((OrderActivity)mActivityRule.getActivity()).mFragmentManager.beginTransaction()
-                .replace(R.id.container, new ReviewFragment())
-                .commit();
-
-        TempOrder tempOrder = new TempOrder();
-        tempOrder.setVendor(mVendor);
-        OrderActivity.mTempOrder = tempOrder;
-
-        onView(withId(R.id.btn_pay)).perform(click());
-        Order order = OrderActivity.mOrder;
-        assert(order.getID() != null);
-        assertEquals(order.getCustomerID(), PropertyManager.getInstance().getID());
-        assertEquals(order.getVendorID(), mVendor.getID());
-        assert(order.getFoodItemIDQuantMap().isEmpty());
-    }
-
     public void generateOrderWithSelection(){
         ((OrderActivity)mActivityRule.getActivity()).mFragmentManager.beginTransaction()
                 .replace(R.id.container, new ReviewFragment())

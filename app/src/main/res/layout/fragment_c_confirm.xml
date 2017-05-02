@@ -8,16 +8,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_estimation_label"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Estimated Pickup"/>
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/list_confirm_padding_top"
+        android:layout_marginLeft="@dimen/list_label_margin_side"
+        android:layout_marginRight="@dimen/list_label_margin_side"
+        android:paddingBottom="@dimen/list_padding_bottom"
+        android:textAlignment="center"
+        android:text="Estimated Pickup"
+        android:textAppearance="@style/font_confirm_label"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_estimation_label"
         android:text="12:10 PM"
-        android:id="@+id/text_estimated_time"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/list_label_margin_side"
+        android:layout_marginRight="@dimen/list_label_margin_side"
+        android:paddingBottom="@dimen/list_padding_bottom"
+        android:textAlignment="center"
+        android:id="@+id/text_estimated_time"
+        android:textAppearance="@style/font_confirm_text"/>
 
 </RelativeLayout>
