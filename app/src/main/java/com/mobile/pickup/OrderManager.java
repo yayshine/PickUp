@@ -83,6 +83,7 @@ public class OrderManager {
         return customerOrders;
     }
 
+    //what does this function do?
     public void setOnOrdersReadListener(OnOrdersReadListener listener) {
         mListener = listener;
     }

@@ -50,6 +50,8 @@ public class OrderListActivity extends Activity
         ListView orderList = (ListView) findViewById(R.id.order_list_view);  //create the list object
         orderList.setAdapter(adapter1);                                      //use List object to set
 
+
+        //listen for swipes to delete
         SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener
                 (orderList, new SwipeDismissListViewTouchListener.DismissCallbacks()
                 {
@@ -59,18 +61,18 @@ public class OrderListActivity extends Activity
                             }
 
                             @Override
+                            //delete on dismiss
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions)
                                 {
+                                    String removeMessage = "Finished Order#" + (int)(position+1) + ". Removed from list!";
+                                    Toast.makeText(OrderListActivity.this, removeMessage,Toast.LENGTH_LONG).show();
                                     orders.remove(position);
                                     adapter1.notifyDataSetChanged();
                                 }
                             }
                 });
         orderList.setOnTouchListener(touchListener);
-
-
-
 
     }
 
@@ -79,7 +81,7 @@ public class OrderListActivity extends Activity
     private void populateOrderList()
     {
         //later populate using OrderManager.java
-        HashMap<String, Integer> sotired = new HashMap<String,Integer>();
+        /*HashMap<String, Integer> sotired = new HashMap<String,Integer>();
         sotired.put("ham", 3);
         sotired.put("dirt", 4);
         sotired.put("lol", 1);
@@ -94,16 +96,18 @@ public class OrderListActivity extends Activity
         orders.add(order2);
 
         orders.add(order2);orders.add(order2);
-        orders.add(order2);orders.add(order2);orders.add(order2);orders.add(order2);
+        orders.add(order2);orders.add(order2);orders.add(order2);orders.add(order2);*/
 
-        /*manager = new OrderManager();
+        manager = new OrderManager();
         orders = manager.getAllActiveOrders(vendorID);
+
+        //when there is a change in the local adapter1, call notifyDataSetChanged to change it in Firebase
         manager.setOnOrdersReadListener(new OrderManager.OnOrdersReadListener() {
-            @Override
-            public void onFinish() {
-             adapter1.notifyDataSetChanged();
-            }
-        });*/
+        @Override
+        public void onFinish() {
+            adapter1.notifyDataSetChanged();
+        }
+    });
     }
 
 
@@ -132,17 +136,13 @@ public class OrderListActivity extends Activity
             OrderListItem currentOrder = orders.get(position);
 
 
-            /*
-                set the currentOrder to be swipe-able
-            */
-
-
             //load current Order object's image into ImageButton; set listener
-
+            /*
             ImageButton doneButton = (ImageButton) itemView.findViewById(R.id.done_button);
             doneButton.setImageResource(R.drawable.done_button);
             MyOnClickListener listener = new MyOnClickListener(position);
             doneButton.setOnClickListener(listener);
+            */
 
             //sets crder# and customer name
             String orderTitle = "Order#"+(int)(position+1) + ": " + orders.get(position).getCustomerName();
@@ -184,7 +184,6 @@ public class OrderListActivity extends Activity
             Toast.makeText(OrderListActivity.this, removeMessage,Toast.LENGTH_LONG).show();
             adapter1.remove(orders.get(pos));
             adapter1.notifyDataSetChanged();
-
         }
     }
 

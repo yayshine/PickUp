@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <!--background="#0000" makes background transparent (removes ugly grey)-->
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/done_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:scaleType="centerInside"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" />-->
 
     <TextView
         android:id="@+id/customer_name"
