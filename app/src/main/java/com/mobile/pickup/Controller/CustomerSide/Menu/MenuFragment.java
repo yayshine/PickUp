@@ -27,6 +27,7 @@ public class MenuFragment extends Fragment {
     List<FoodItem> mMenu = new ArrayList<>();
 
     MenuAdapter mAdapter;
+    public static Button btn_checkout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class MenuFragment extends Fragment {
 
         listView.setAdapter(mAdapter);
 
-        Button btn_checkout = (Button)rootView.findViewById(R.id.btn_checkout);
+        btn_checkout = (Button)rootView.findViewById(R.id.btn_checkout);
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

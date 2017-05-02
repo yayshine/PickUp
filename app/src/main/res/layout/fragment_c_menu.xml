@@ -1,49 +1,66 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <RelativeLayout
+    <TextView
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="@dimen/list_padding_top"
+        android:layout_marginLeft="@dimen/list_label_margin_side"
+        android:layout_marginRight="@dimen/list_label_margin_side"
+        android:paddingBottom="@dimen/list_padding_bottom"
+        android:id="@+id/text_menu_label"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:textAppearance="@style/font_label"/>
 
-        <TextView
-            android:id="@+id/text_estimation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Estimation: 20 mins" />
+    <View style="@style/divider"
+        android:id="@+id/divider"
+        android:layout_below="@id/text_menu_label"
+        android:layout_marginLeft="@dimen/list_margin_side"
+        android:layout_marginRight="@dimen/list_margin_side"/>
 
-        <TextView
-            android:id="@+id/text_menu_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MENU"
-            android:layout_below="@+id/text_estimation"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+    <Button
+        android:id="@+id/btn_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorGrey"
+        android:textAppearance="@style/font_button"
+        android:clickable="false"
+        android:text="CHECKOUT" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/text_menu_label"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@+id/btn_checkout"
-            android:clickable="false"
-            android:id="@+id/list_menu"/>
+    <TextView
+        android:id="@+id/text_estimation"
+        android:layout_above="@id/btn_checkout"
+        android:paddingTop="@dimen/list_padding_top"
+        android:layout_marginLeft="@dimen/list_label_margin_side"
+        android:layout_marginRight="@dimen/list_label_margin_side"
+        android:paddingBottom="@dimen/list_padding_bottom"
+        android:textAppearance="@style/font_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="Estimation: 20 mins" />
 
-        <Button
-            android:id="@+id/btn_checkout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:text="CHECKOUT" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/text_estimation"
+        android:layout_below="@id/divider"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:layout_marginLeft="@dimen/list_margin_side"
+        android:layout_marginRight="@dimen/list_margin_side"
+        android:divider="@color/colorGrey"
+        android:dividerHeight="@dimen/divider"
+        android:id="@+id/list_menu"/>
 
-    </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

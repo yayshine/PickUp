@@ -1,6 +1,7 @@
 package com.mobile.pickup.View.CustomerSide.Menu;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -8,8 +9,10 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.mobile.pickup.Controller.CustomerSide.Menu.MenuFragment;
 import com.mobile.pickup.Controller.CustomerSide.OrderActivity;
 import com.mobile.pickup.Model.FoodItem;
+import com.mobile.pickup.PickUpApplication;
 import com.mobile.pickup.R;
 
 /**
@@ -32,9 +35,9 @@ public class FoodItemView extends FrameLayout {
 
     public void setData(final FoodItem foodItem){
         text_name.setText(foodItem.getName());
-        text_price.setText(Float.toString(foodItem.getPrice()));
+        text_price.setText("$"+Float.toString(foodItem.getPrice()));
 
-        Integer[] quants = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+        Integer[] quants = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> quantAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, quants);
         spinner_quantity.setAdapter(quantAdapter);
 
@@ -48,15 +51,20 @@ public class FoodItemView extends FrameLayout {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int quantity = (int)parent.getSelectedItem();
                 if(quantity > 0) {
+                    MenuFragment.btn_checkout.setClickable(true);
+                    MenuFragment.btn_checkout.setBackgroundColor(ContextCompat.getColor(PickUpApplication.getContext(), R.color.colorPrimaryDark));
                     OrderActivity.mTempOrder.getFoodItemQuantMap().put(foodItem, quantity);
                 }else{
                     OrderActivity.mTempOrder.getFoodItemQuantMap().remove(foodItem);
+                    if(OrderActivity.mTempOrder.getFoodItemQuantMap().isEmpty()) {
+                        MenuFragment.btn_checkout.setClickable(false);
+                        MenuFragment.btn_checkout.setBackgroundColor(ContextCompat.getColor(PickUpApplication.getContext(), R.color.colorGrey));
+                    }
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onNothingSelected(AdapterView<?> parent){
             }
         });
     }
