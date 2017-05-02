@@ -285,6 +285,16 @@ public class TempLoginActivity extends AppCompatActivity implements View.OnClick
             findViewById(R.id.signed_in_buttons).setVisibility(View.VISIBLE);
 
             findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
+
+            Customer customer = CustomerManager.setCustomer(user.getUid(), user.getEmail());
+            PropertyManager propertyManager = PropertyManager.getInstance();
+            propertyManager.setUsername(customer.getCustomerName());
+            propertyManager.setID(customer.getID());
+
+            Intent intent = new Intent(TempLoginActivity.this, OrderActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
