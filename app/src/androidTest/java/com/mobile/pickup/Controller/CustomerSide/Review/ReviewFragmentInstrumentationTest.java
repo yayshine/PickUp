@@ -50,6 +50,7 @@ public class ReviewFragmentInstrumentationTest {
         mVendor = new Vendor("-Kfz4012r7qbR08higRA", "Uncle Luoyang", "-Kg1ftYLPH-D9m4hZcoy", "10:00AM - 6:00PM", true);
     }
 
+    @Test
     public void generateOrderWithSelection(){
         ((OrderActivity)mActivityRule.getActivity()).mFragmentManager.beginTransaction()
                 .replace(R.id.container, new ReviewFragment())
